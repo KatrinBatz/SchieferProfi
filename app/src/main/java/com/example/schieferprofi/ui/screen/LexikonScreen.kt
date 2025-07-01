@@ -19,13 +19,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.DeckungList
 import com.example.schieferprofi.viewmodel.DeckungViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun LexikonScreen() {
+fun LexikonScreen(navController: NavController) {
 
     val deckungsViewModel: DeckungViewModel = koinViewModel()
     val deckungen by deckungsViewModel.deckungen.collectAsState()

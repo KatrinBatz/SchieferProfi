@@ -17,6 +17,7 @@ import com.example.schieferprofi.ui.screen.PlanungshilfeScreen
 import com.example.schieferprofi.ui.screen.QuizScreen
 import com.example.schieferprofi.ui.screen.WinkelmesserScreen
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppStart() {
@@ -44,7 +45,7 @@ fun AppStart() {
                 }
 
                 composable("lexikon") {
-                    LexikonScreen()
+                    LexikonScreen(navController)
                 }
 
                 composable("winkelmesser") {

@@ -43,11 +43,11 @@ fun SpiritLibelle(angle: Float, orientation: Orientation) {
                 width = if (orientation == Orientation.Horizontal) barLength else trackHeight,
                 height = if (orientation == Orientation.Horizontal) trackHeight else barLength
             )
-            .background(colorResource(R.color.hellgrau), shape = CircleShape),
+            .background(colorResource(R.color.white), shape = CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
-            drawRoundRect(color = Color(0xFF444444), cornerRadius = CornerRadius(16f, 16f))
+            drawRoundRect(color = Color(0xFFffffff), cornerRadius = CornerRadius(16f, 16f))
         }
 
         Box(
@@ -60,15 +60,15 @@ fun SpiritLibelle(angle: Float, orientation: Orientation) {
                         IntOffset(0, (animatedOffset * 80).dp.roundToPx())
                     pxOffset
                 }
-                .background(colorResource(R.color.hellgrau), shape = CircleShape)
+                .background(colorResource(R.color.schiefergrau), shape = CircleShape)
                 .shadow(6.dp, CircleShape)
         )
 
 
         Text(
             text = "${"%.1f".format(angle)}°",
-            color = colorResource(R.color.ziegelrot),
-            fontSize = 18.sp,
+            color = colorResource(R.color.moosgruen),
+            fontSize = 30.sp,
             modifier = Modifier
                 .align(if (orientation == Orientation.Horizontal) Alignment.BottomCenter else Alignment.CenterEnd)
                 .padding(4.dp)

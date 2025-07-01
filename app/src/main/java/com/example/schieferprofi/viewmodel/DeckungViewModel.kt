@@ -31,7 +31,7 @@ class DeckungViewModel(
                 _deckungen.value = response.sortedBy {it.name}
 
             } catch (e: Exception) {
-                Log.e("ERROR", "Error getting enriched veggie meals: ${e.localizedMessage}")
+                Log.e("DECKUNGEN", "Fehler beim Abrufen der Deckungen: ${e.localizedMessage}")
             } finally {
                 _isLoading.value = false
             }
