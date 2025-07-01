@@ -20,14 +20,17 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
-import com.example.schieferprofi.data.model.AltdeutscheDeckungInfo
 import com.example.schieferprofi.data.model.Deckung
+import com.example.schieferprofi.data.model.DynamischeRechteckDoppeldeckungInfo
 import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferSecondaryStyle
 import com.example.schieferprofi.util.schieferTitleStyle
 
 @Composable
-fun AltdeutschCard(altdeutsch: AltdeutscheDeckungInfo, deckung: Deckung) {
+fun DynamischeRechteckDoppeldeckungCard(
+    info: DynamischeRechteckDoppeldeckungInfo,
+    deckung: Deckung
+) {
     GlassmorphismCard {
         LazyColumn(
             modifier = Modifier.padding(16.dp)
@@ -62,48 +65,43 @@ fun AltdeutschCard(altdeutsch: AltdeutscheDeckungInfo, deckung: Deckung) {
                     color = DividerDefaults.color
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-
-                Text("🪨 Deckstein-Regeln", style = schieferTitleStyle())
-                Text("• Hiebarten: ${altdeutsch.decksteinRegeln.hiebarten.joinToString(", ")}", style = schieferBodyStyle())
-                Text("• Befestigung Dach: ${altdeutsch.decksteinRegeln.befestigungDach}", style = schieferBodyStyle())
-                Text("• Befestigung Wand: ${altdeutsch.decksteinRegeln.befestigungWand}", style = schieferBodyStyle())
-                Text("• Bemerkung: ${altdeutsch.decksteinRegeln.bemerkung}", style = schieferSecondaryStyle())
+            }
+            item {
+                Text("Beschreibung", style = schieferTitleStyle())
+                Text(info.beschreibung, style = schieferBodyStyle())
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("Deckunterlage: ${info.deckunterlage}", style = schieferBodyStyle())
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("Deckbild: ${info.deckbild}", style = schieferBodyStyle())
+                Text("Verlegeschema: ${info.verlegeschema}", style = schieferBodyStyle())
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("Dachneigungs-Hinweis: ${info.dachneigungHinweis}", style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(12.dp))
-
-                Text("📏 Sortierung – Sparren", style = schieferTitleStyle())
-            }
-            items(altdeutsch.sortierung.sparren) { eintrag ->
-                Text(
-                    "• Höhe: ${eintrag.hoeheMeter}, Differenz: ${eintrag.differenzMm} mm, Sortierungen: ${eintrag.sortierungen}",
-                    style = schieferBodyStyle()
-                )
             }
             item {
-                Text("📐 Sortierung – Wand", style = schieferTitleStyle())
-            }
-            items(altdeutsch.sortierung.wand) { eintrag ->
-                Text(
-                    "• Höhe: ${eintrag.hoeheMeter}, Differenz: ${eintrag.differenzMm} mm, Sortierungen: ${eintrag.sortierungen}",
-                    style = schieferBodyStyle()
-                )
-            }
-            item { Spacer(modifier = Modifier.height(12.dp)) }
-
-            item {
-                Text("🏛️ Monumentum-Zuordnung", style = schieferTitleStyle())
-            }
-            items(altdeutsch.steinZuordnung.monumentum) { it ->
-                Text("• Sortierung: ${it.sortierung}", style = schieferBodyStyle())
-                Text("  Anfang Ort: ${it.anfangOrt}, Ende Ort: ${it.endOrt}", style = schieferSecondaryStyle())
-                Text("  Kehlsteine: ${it.kehlsteine.joinToString(", ")}", style = schieferSecondaryStyle())
+                Text("Befestigung", style = schieferTitleStyle())
+                Text("Dach: ${info.befestigung.dach}", style = schieferBodyStyle())
+                Text("Ort/Grat: ${info.befestigung.ortGrat}", style = schieferBodyStyle())
+                Spacer(modifier = Modifier.height(12.dp))
             }
             item {
-                Text("🏗️ Intersin-Zuordnung", style = schieferTitleStyle())
+                Text("Höhenüberdeckung", style = schieferTitleStyle())
+                // Hier kannst du info.hoehenueberdeckung ggf. als Map ausgeben
+                // Zum Beispiel, falls es key-value-pairs gibt:
+                // info.hoehenueberdeckung.map.forEach { (key, value) -> ... }
             }
-            items(altdeutsch.steinZuordnung.intersin) { it ->
-                Text("• Sortierung: ${it.sortierung}", style = schieferBodyStyle())
-                Text("  Anfang Ort: ${it.anfangOrt}, Ende Ort: ${it.endOrt}", style = schieferSecondaryStyle())
-                Text("  Kehlsteine: ${it.kehlsteine.joinToString(", ")}", style = schieferSecondaryStyle())
+            item {
+                Text("Fugenversatz: ${info.fugenversatz} mm", style = schieferSecondaryStyle())
+                Spacer(modifier = Modifier.height(12.dp))
+            }
+            item {
+                Text("Formate", style = schieferTitleStyle())
+            }
+            items(info.formate) { format ->
+                Text("• Steinhöhe: ${format.steinhoehe} mm", style = schieferBodyStyle())
+                Text("  Gebindehöhen: ${format.gebindehoehe.joinToString()}", style = schieferSecondaryStyle())
+                Text("  Formate: ${format.formate.joinToString()}", style = schieferSecondaryStyle())
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }

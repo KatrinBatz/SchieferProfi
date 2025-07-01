@@ -11,7 +11,7 @@ data class DynamischeRechteckDoppeldeckungInfo(
     val deckbild: String = "",
     val verlegeschema: String = "",
     val dachneigungHinweis: String = "",
-    val hoehenueberdeckung: HoehenueberdeckungMap = HoehenueberdeckungMap(),
+    val hoehenueberdeckung: HoehenUeberdeckung = HoehenUeberdeckung(),
     val fugenversatz: Int = 0,
     val formate: List<DynamischeRechteckFormat> = emptyList()
 )
@@ -23,7 +23,7 @@ data class RechteckBefestigung(
 )
 
 @Serializable
-data class BefestigungDynamischRechteck(
+data class HoehenUeberdeckung(
     @SerialName("≥ 40°") val ab40Grad: Int = 0,
     @SerialName("≥ 50°") val ab50Grad: Int = 0
 )

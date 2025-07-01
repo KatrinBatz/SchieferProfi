@@ -20,18 +20,19 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
-import com.example.schieferprofi.data.model.AltdeutscheDeckungInfo
+import com.example.schieferprofi.data.model.BogenschnittDeckungInfo
 import com.example.schieferprofi.data.model.Deckung
 import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferSecondaryStyle
 import com.example.schieferprofi.util.schieferTitleStyle
 
 @Composable
-fun AltdeutschCard(altdeutsch: AltdeutscheDeckungInfo, deckung: Deckung) {
+fun BogenschnittCard(bogenschnitt: BogenschnittDeckungInfo, deckung: Deckung) {
     GlassmorphismCard {
         LazyColumn(
             modifier = Modifier.padding(16.dp)
         ) {
+            // Kopfbereich mit Bild & Basisdaten
             item {
                 AsyncImage(
                     model = deckung.bildUrl,
@@ -62,48 +63,46 @@ fun AltdeutschCard(altdeutsch: AltdeutscheDeckungInfo, deckung: Deckung) {
                     color = DividerDefaults.color
                 )
                 Spacer(modifier = Modifier.height(8.dp))
+            }
 
-                Text("🪨 Deckstein-Regeln", style = schieferTitleStyle())
-                Text("• Hiebarten: ${altdeutsch.decksteinRegeln.hiebarten.joinToString(", ")}", style = schieferBodyStyle())
-                Text("• Befestigung Dach: ${altdeutsch.decksteinRegeln.befestigungDach}", style = schieferBodyStyle())
-                Text("• Befestigung Wand: ${altdeutsch.decksteinRegeln.befestigungWand}", style = schieferBodyStyle())
-                Text("• Bemerkung: ${altdeutsch.decksteinRegeln.bemerkung}", style = schieferSecondaryStyle())
+            // Bogenschnitt spezifisch
+            item {
+                Text("Beschreibung", style = schieferTitleStyle())
+                Text(bogenschnitt.beschreibung, style = schieferBodyStyle())
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("Decksteinmodell: ${bogenschnitt.decksteinmodell.joinToString()}", style = schieferBodyStyle())
+                Text("Deckunterlage: ${bogenschnitt.deckunterlage}", style = schieferBodyStyle())
+                Text("Befestigung Dach: ${bogenschnitt.befestigungDach}", style = schieferBodyStyle())
+                Text("Befestigung Wand: ${bogenschnitt.befestigungWand}", style = schieferBodyStyle())
+                Text("Fußdeckung: ${bogenschnitt.fussdeckung}", style = schieferBodyStyle())
+                Text("Ort/Grat/First: ${bogenschnitt.ortGratFirst}", style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
+            }
 
-                Text("📏 Sortierung – Sparren", style = schieferTitleStyle())
+            item { Text("Formate Wand", style = schieferTitleStyle()) }
+            items(bogenschnitt.formateWand) { format ->
+                Text("• Größe: ${format.groesse}", style = schieferBodyStyle())
+                Text("  Höhenüberdeckung: ${format.hoehenUeberdeckung} mm, Seitenüberdeckung: ${format.seitenUeberdeckung} mm", style = schieferSecondaryStyle())
+                Text("  Bedarf pro m²: ${format.bedarfProM2}, Lattenabstand: ${format.lattenabstandCm} cm", style = schieferSecondaryStyle())
+                Text("  Lattenverbrauch: ${format.lattenverbrauchM} m, Gewicht pro 1000: ${format.gewichtPro1000} kg", style = schieferSecondaryStyle())
+                Text("  Stück pro Kiste: ${format.stkProKiste}", style = schieferSecondaryStyle())
+                Spacer(modifier = Modifier.height(8.dp))
             }
-            items(altdeutsch.sortierung.sparren) { eintrag ->
-                Text(
-                    "• Höhe: ${eintrag.hoeheMeter}, Differenz: ${eintrag.differenzMm} mm, Sortierungen: ${eintrag.sortierungen}",
-                    style = schieferBodyStyle()
-                )
-            }
-            item {
-                Text("📐 Sortierung – Wand", style = schieferTitleStyle())
-            }
-            items(altdeutsch.sortierung.wand) { eintrag ->
-                Text(
-                    "• Höhe: ${eintrag.hoeheMeter}, Differenz: ${eintrag.differenzMm} mm, Sortierungen: ${eintrag.sortierungen}",
-                    style = schieferBodyStyle()
-                )
-            }
-            item { Spacer(modifier = Modifier.height(12.dp)) }
 
-            item {
-                Text("🏛️ Monumentum-Zuordnung", style = schieferTitleStyle())
+            item { Text("Ort-Zuordnung", style = schieferTitleStyle()) }
+            items(bogenschnitt.ortZuordnung) { ort ->
+                Text("• Format: ${ort.format}", style = schieferBodyStyle())
+                Text("  Höhenüberdeckung: ${ort.hoehenUeberdeckung} mm", style = schieferSecondaryStyle())
+                Text("  Anfang Ort: ${ort.anfangort}, Ende Ort: ${ort.endort}", style = schieferSecondaryStyle())
+                Text("  Stück pro Meter: ${ort.stkProM}", style = schieferSecondaryStyle())
+                Spacer(modifier = Modifier.height(8.dp))
             }
-            items(altdeutsch.steinZuordnung.monumentum) { it ->
-                Text("• Sortierung: ${it.sortierung}", style = schieferBodyStyle())
-                Text("  Anfang Ort: ${it.anfangOrt}, Ende Ort: ${it.endOrt}", style = schieferSecondaryStyle())
-                Text("  Kehlsteine: ${it.kehlsteine.joinToString(", ")}", style = schieferSecondaryStyle())
-            }
-            item {
-                Text("🏗️ Intersin-Zuordnung", style = schieferTitleStyle())
-            }
-            items(altdeutsch.steinZuordnung.intersin) { it ->
-                Text("• Sortierung: ${it.sortierung}", style = schieferBodyStyle())
-                Text("  Anfang Ort: ${it.anfangOrt}, Ende Ort: ${it.endOrt}", style = schieferSecondaryStyle())
-                Text("  Kehlsteine: ${it.kehlsteine.joinToString(", ")}", style = schieferSecondaryStyle())
+
+            item { Text("Kehl-Material", style = schieferTitleStyle()) }
+            items(bogenschnitt.kehlMaterial) { kehl ->
+                Text("• Sortierung: ${kehl.sortierung}", style = schieferBodyStyle())
+                Text("  Maße: ${kehl.masse}", style = schieferSecondaryStyle())
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }

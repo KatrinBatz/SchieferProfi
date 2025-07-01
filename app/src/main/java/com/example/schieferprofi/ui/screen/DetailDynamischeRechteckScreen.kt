@@ -12,19 +12,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
-import com.example.schieferprofi.ui.components.AltdeutschCard
-import com.example.schieferprofi.viewmodel.AltdeutschesViewModel
+import com.example.schieferprofi.ui.components.DynamischeRechteckDoppeldeckungCard
 import com.example.schieferprofi.viewmodel.DeckungViewModel
+import com.example.schieferprofi.viewmodel.DynamischeRechteckViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DetailAltdeutschScreen(deckungId: String, navController: NavController) {
+fun DetailDynamischeRechteckScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
-    val altdeutschViewModel: AltdeutschesViewModel = koinViewModel()
+    val dynamischViewModel: DynamischeRechteckViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
-    val altdeutsch by altdeutschViewModel.altdeutsch.collectAsState()
-    val isLoading by altdeutschViewModel.isLoading.collectAsState()
+    val info by dynamischViewModel.dynamischeRechteck.collectAsState()
+    val isLoading by dynamischViewModel.isLoading.collectAsState()
 
     val deckung = deckungen.find { it.id == deckungId }
 
@@ -39,7 +39,7 @@ fun DetailAltdeutschScreen(deckungId: String, navController: NavController) {
         when {
             isLoading -> Text("Lade Details…")
             deckung == null -> Text("Deckung nicht gefunden!")
-            else -> AltdeutschCard(altdeutsch = altdeutsch, deckung = deckung)
+            else -> DynamischeRechteckDoppeldeckungCard(info = info, deckung = deckung)
         }
     }
 }

@@ -46,7 +46,7 @@ fun LexikonScreen(navController: NavController) {
                     "Schieferlexikon",
                     color = colorResource(R.color.hellgrau),
                     fontFamily = FontFamily(Font(R.font.ptserif_bolditalic)),
-                    fontSize = 40.sp,
+                    fontSize = 24.sp,
                     textDecoration = TextDecoration.Underline
                 )
             }
@@ -56,7 +56,12 @@ fun LexikonScreen(navController: NavController) {
                 }
 
                 else -> {
-                    DeckungList()
+                    DeckungList(
+                        deckungen = deckungen,
+                        onDeckungClick = { id ->
+                            navController.navigate("detail/$id")
+                        }
+                    )
                 }
             }
         }

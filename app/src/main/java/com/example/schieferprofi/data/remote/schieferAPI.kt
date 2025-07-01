@@ -66,7 +66,7 @@ interface APIService {
     @GET("schiefer/dynamische")
     suspend fun getDynamische(): DynamischeDeckungInfo
 
-    @GET("schiefer/geschlaufte")
+    @GET("schiefer/geschlaufe")
     suspend fun getGeschlaufte(): GeschlaufteDeckungInfo
 
     @GET("schiefer/gezogene")

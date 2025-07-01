@@ -1,6 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,19 +15,26 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
 import com.example.schieferprofi.data.model.Deckung
+import com.example.schieferprofi.util.schieferBodyStyle
+import com.example.schieferprofi.util.schieferSecondaryStyle
+import com.example.schieferprofi.util.schieferTitleStyle
 
 @Composable
-fun DeckungCard(deckung: Deckung) {
+fun DeckungCard(
+    deckung: Deckung,
+    onClick: () -> Unit
+) {
 
     GlassmorphismCard {
-        Column(modifier = Modifier.padding(16.dp)) {
+        Column(
+            modifier = Modifier
+                .clickable{ onClick() }
+                .padding(16.dp)) {
             AsyncImage(
                 model = deckung.bildUrl,
                 contentDescription = "Bild von ${deckung.name}",
@@ -44,29 +52,25 @@ fun DeckungCard(deckung: Deckung) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = deckung.name, color = colorResource(R.color.hellgrau),
-                fontFamily = FontFamily(Font(R.font.ptserif_bolditalic)),
-                fontSize = 24.sp
+                text = deckung.name,
+                style = schieferTitleStyle()
             )
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = deckung.beschreibung, color = colorResource(R.color.hellgrau),
-                fontFamily = FontFamily(Font(R.font.ptserif_italic)),
-                fontSize = 20.sp
+                text = deckung.beschreibung,
+                style = schieferBodyStyle(),
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Verwendungsbereiche: ${deckung.verwendung}",
-                color = colorResource(R.color.hellgrau),
-                fontFamily = FontFamily(Font(R.font.ptserif_italic)),
-                fontSize = 20.sp
+                text = "Verwendungsbereiche: ${deckung.verwendung.joinToString(", ")}",
+                style = schieferSecondaryStyle()
             )
             Text(
                 text = "Schwierigkeitsgrad: ${deckung.schwierigkeitsgrad}",
-                color = colorResource(R.color.hellgrau),
-                fontFamily = FontFamily(Font(R.font.ptserif_italic)),
-                fontSize = 20.sp,
+                style = schieferSecondaryStyle(),
                 modifier = Modifier.padding(top = 4.dp)
             )
         }

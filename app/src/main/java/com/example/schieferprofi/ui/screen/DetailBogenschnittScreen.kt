@@ -12,19 +12,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
-import com.example.schieferprofi.ui.components.AltdeutschCard
-import com.example.schieferprofi.viewmodel.AltdeutschesViewModel
+import com.example.schieferprofi.ui.components.BogenschnittCard
+import com.example.schieferprofi.viewmodel.BogenschnittViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DetailAltdeutschScreen(deckungId: String, navController: NavController) {
+fun DetailBogenschnittScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
-    val altdeutschViewModel: AltdeutschesViewModel = koinViewModel()
+    val bogenschnittViewModel: BogenschnittViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
-    val altdeutsch by altdeutschViewModel.altdeutsch.collectAsState()
-    val isLoading by altdeutschViewModel.isLoading.collectAsState()
+    val info by bogenschnittViewModel.bogenschnitt.collectAsState()
+    val isLoading by bogenschnittViewModel.isLoading.collectAsState()
 
     val deckung = deckungen.find { it.id == deckungId }
 
@@ -39,7 +39,7 @@ fun DetailAltdeutschScreen(deckungId: String, navController: NavController) {
         when {
             isLoading -> Text("Lade Details…")
             deckung == null -> Text("Deckung nicht gefunden!")
-            else -> AltdeutschCard(altdeutsch = altdeutsch, deckung = deckung)
+            else -> BogenschnittCard(bogenschnitt = info, deckung = deckung)
         }
     }
 }
