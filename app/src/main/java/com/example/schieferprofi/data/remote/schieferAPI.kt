@@ -7,6 +7,7 @@ import com.example.schieferprofi.data.model.Deckung
 import com.example.schieferprofi.data.model.DeckungsRegelwerk
 import com.example.schieferprofi.data.model.DynamischeDeckungInfo
 import com.example.schieferprofi.data.model.DynamischeRechteckDoppeldeckungInfo
+import com.example.schieferprofi.data.model.GebindesteigungInfo
 import com.example.schieferprofi.data.model.GeschlaufteDeckungInfo
 import com.example.schieferprofi.data.model.GezogeneDeckungInfo
 import com.example.schieferprofi.data.model.HorizontaleDeckungInfo
@@ -107,6 +108,9 @@ interface APIService {
 
     @GET("schiefer/horizontale")
     suspend fun getHorizontale(): HorizontaleDeckungInfo
+
+    @GET("schiefer/gebindesteigung")
+    suspend fun getGebindesteigung(): GebindesteigungInfo
 }
 
 object SchieferAPI {
