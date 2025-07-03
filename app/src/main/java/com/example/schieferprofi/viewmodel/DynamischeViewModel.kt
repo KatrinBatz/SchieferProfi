@@ -4,17 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schieferprofi.data.model.DynamischeDeckungInfo
-import com.example.schieferprofi.data.repository.DynamischeRepositoryInterface
+import com.example.schieferprofi.data.repository.DeckartenRepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DynamischeViewModel(
-    private val dynamischeRepository: DynamischeRepositoryInterface
+    private val dynamischeRepository: DeckartenRepositoryInterface
 ) : ViewModel() {
 
-    private val _dynamisch = MutableStateFlow<DynamischeDeckungInfo>(DynamischeDeckungInfo())
+    private val _dynamisch = MutableStateFlow(DynamischeDeckungInfo())
 
     val dynamisch = _dynamisch.asStateFlow()
 

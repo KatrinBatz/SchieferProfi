@@ -4,17 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schieferprofi.data.model.AltdeutscheDeckungInfo
-import com.example.schieferprofi.data.repository.AltdeutschRepositoryInterface
+import com.example.schieferprofi.data.repository.DeckartenRepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AltdeutschesViewModel (
-    private val altdeutschesRepository: AltdeutschRepositoryInterface
+    private val altdeutschesRepository: DeckartenRepositoryInterface
 ) : ViewModel(){
 
-    private val _altdeutsches = MutableStateFlow<AltdeutscheDeckungInfo>(AltdeutscheDeckungInfo())
+    private val _altdeutsches = MutableStateFlow(AltdeutscheDeckungInfo())
 
     val altdeutsch = _altdeutsches.asStateFlow()
 

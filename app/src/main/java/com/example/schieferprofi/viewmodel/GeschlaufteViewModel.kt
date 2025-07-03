@@ -4,17 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schieferprofi.data.model.GeschlaufteDeckungInfo
-import com.example.schieferprofi.data.repository.GeschlaufteRepositoryInterface
+import com.example.schieferprofi.data.repository.DeckartenRepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class GeschlaufteViewModel(
-    private val geschlaufteRepository: GeschlaufteRepositoryInterface
+    private val geschlaufteRepository: DeckartenRepositoryInterface
 ) : ViewModel() {
 
-    private val _geschlaufte = MutableStateFlow<GeschlaufteDeckungInfo>(GeschlaufteDeckungInfo())
+    private val _geschlaufte = MutableStateFlow(GeschlaufteDeckungInfo())
 
     val geschlaufte = _geschlaufte.asStateFlow()
 

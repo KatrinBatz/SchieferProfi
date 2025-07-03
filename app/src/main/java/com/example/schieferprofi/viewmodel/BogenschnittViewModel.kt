@@ -4,17 +4,17 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schieferprofi.data.model.BogenschnittDeckungInfo
-import com.example.schieferprofi.data.repository.BogenschnittRepositoryInterface
+import com.example.schieferprofi.data.repository.DeckartenRepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class BogenschnittViewModel (
-    private val bogenschnittRepository: BogenschnittRepositoryInterface
+    private val bogenschnittRepository: DeckartenRepositoryInterface
 ) : ViewModel() {
 
-    private val _bogenschnitt = MutableStateFlow<BogenschnittDeckungInfo>(BogenschnittDeckungInfo())
+    private val _bogenschnitt = MutableStateFlow(BogenschnittDeckungInfo())
 
     val bogenschnitt = _bogenschnitt.asStateFlow()
 
