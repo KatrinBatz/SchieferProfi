@@ -52,65 +52,47 @@ interface APIService {
     @GET("schiefer/deckungsregelwerk")
     suspend fun getDeckungsregelwerk(): DeckungsRegelwerk
 
-    @GET("schiefer/altdeutsch")
-    suspend fun getAltdeutsche(): AltdeutscheDeckungInfo
-
-    @GET("schiefer/lineare")
-    suspend fun getLineare(): LineareDeckungInfo
-
-    @GET("schiefer/unterlegte")
-    suspend fun getUnterlegte(): UnterlegteDeckungInfo
-
-    @GET("schiefer/variable")
-    suspend fun getVariable(): VariableDeckungInfo
-
-    @GET("schiefer/dynamische")
-    suspend fun getDynamische(): DynamischeDeckungInfo
-
-    @GET("schiefer/geschlaufe")
-    suspend fun getGeschlaufte(): GeschlaufteDeckungInfo
-
-    @GET("schiefer/gezogene")
-    suspend fun getGezogene(): GezogeneDeckungInfo
-
-    @GET("schiefer/kettengebinde")
-    suspend fun getKettengebinde(): KettengebindeInfo
-
-    @GET("schiefer/waagerecht")
-    suspend fun getWaagerecht(): WaagerechteDeckungInfo
-
-    @GET("schiefer/waben")
-    suspend fun getWaben(): WabenDeckungInfo
-
-    @GET("schiefer/spezial-fischschuppen")
-    suspend fun getFischschuppe(): SpezialFischschuppeDeckungInfo
-
-    @GET("schiefer/wilde-rechteck")
-    suspend fun getRechteck(): WildeRechteckDoppeldeckungInfo
-
-    @GET("schiefer/dynamisch-rechteck")
-    suspend fun getDynamischRechteck(): DynamischeRechteckDoppeldeckungInfo
-
-    @GET("schiefer/rechteck")
-    suspend fun getRechteckDoppeldeckung(): RechteckDoppeldeckungInfo
-
-    @GET("schiefer/universal")
-    suspend fun getUniversal(): UniversalDeckungInfo
-
-    @GET("schiefer/bogenschnitt")
-    suspend fun getBogenschnitt(): BogenschnittDeckungInfo
-
-    @GET("schiefer/spitzwinkel")
-    suspend fun getSpitzwinkel(): SpitzwinkelDeckungInfo
-
-    @GET("schiefer/schuppen")
-    suspend fun getSchuppen(): SchuppenDeckungInfo
-
-    @GET("schiefer/horizontale")
-    suspend fun getHorizontale(): HorizontaleDeckungInfo
-
     @GET("schiefer/gebindesteigung")
     suspend fun getGebindesteigung(): GebindesteigungInfo
+
+    @GET("schiefer/altdeutsch")
+    suspend fun getAltdeutsche(): AltdeutscheDeckungInfo
+    @GET("schiefer/bogenschnitt")
+    suspend fun getBogenschnitt(): BogenschnittDeckungInfo
+    @GET("schiefer/dynamische")
+    suspend fun getDynamische(): DynamischeDeckungInfo
+    @GET("schiefer/dynamisch-rechteck")
+    suspend fun getDynamischRechteck(): DynamischeRechteckDoppeldeckungInfo
+    @GET("schiefer/geschlaufe")
+    suspend fun getGeschlaufte(): GeschlaufteDeckungInfo
+    @GET("schiefer/gezogene")
+    suspend fun getGezogene(): GezogeneDeckungInfo
+    @GET("schiefer/horizontale")
+    suspend fun getHorizontale(): HorizontaleDeckungInfo
+    @GET("schiefer/kettengebinde")
+    suspend fun getKettengebinde(): KettengebindeInfo
+    @GET("schiefer/lineare")
+    suspend fun getLineare(): LineareDeckungInfo
+    @GET("schiefer/rechteck")
+    suspend fun getRechteckDoppeldeckung(): RechteckDoppeldeckungInfo
+    @GET("schiefer/schuppen")
+    suspend fun getSchuppen(): SchuppenDeckungInfo
+    @GET("schiefer/spezial-fischschuppen")
+    suspend fun getFischschuppe(): SpezialFischschuppeDeckungInfo
+    @GET("schiefer/spitzwinkel")
+    suspend fun getSpitzwinkel(): SpitzwinkelDeckungInfo
+    @GET("schiefer/universal")
+    suspend fun getUniversal(): UniversalDeckungInfo
+    @GET("schiefer/unterlegte")
+    suspend fun getUnterlegte(): UnterlegteDeckungInfo
+    @GET("schiefer/variable")
+    suspend fun getVariable(): VariableDeckungInfo
+    @GET("schiefer/waagerecht")
+    suspend fun getWaagerecht(): WaagerechteDeckungInfo
+    @GET("schiefer/waben")
+    suspend fun getWaben(): WabenDeckungInfo
+    @GET("schiefer/wilde-rechteck")
+    suspend fun getRechteck(): WildeRechteckDoppeldeckungInfo
 }
 
 object SchieferAPI {

@@ -13,14 +13,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.DynamischeRechteckDoppeldeckungCard
+import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
-import com.example.schieferprofi.viewmodel.DynamischeRechteckViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailDynamischeRechteckScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
-    val dynamischViewModel: DynamischeRechteckViewModel = koinViewModel()
+    val dynamischViewModel: DeckartenViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
     val info by dynamischViewModel.dynamischeRechteck.collectAsState()

@@ -13,18 +13,18 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.GeschlaufteDeckungCard
+import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
-import com.example.schieferprofi.viewmodel.GeschlaufteViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailGeschlaufteScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
-    val geschlaufteViewModel: GeschlaufteViewModel = koinViewModel()
+    val deckartenViewModel: DeckartenViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
-    val info by geschlaufteViewModel.geschlaufte.collectAsState()
-    val isLoading by geschlaufteViewModel.isLoading.collectAsState()
+    val info by deckartenViewModel.geschlaufte.collectAsState()
+    val isLoading by deckartenViewModel.isLoading.collectAsState()
 
     val deckung = deckungen.find { it.id == deckungId }
 

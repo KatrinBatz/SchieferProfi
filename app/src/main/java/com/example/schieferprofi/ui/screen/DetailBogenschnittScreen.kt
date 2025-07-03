@@ -13,14 +13,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.BogenschnittCard
-import com.example.schieferprofi.viewmodel.BogenschnittViewModel
+import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailBogenschnittScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
-    val bogenschnittViewModel: BogenschnittViewModel = koinViewModel()
+    val bogenschnittViewModel: DeckartenViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
     val info by bogenschnittViewModel.bogenschnitt.collectAsState()

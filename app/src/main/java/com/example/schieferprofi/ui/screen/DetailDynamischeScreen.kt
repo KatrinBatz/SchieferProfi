@@ -13,18 +13,18 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.DynamischeDeckungCard
+import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
-import com.example.schieferprofi.viewmodel.DynamischeViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DetailDynamischeScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
-    val dynamischeViewModel: DynamischeViewModel = koinViewModel()
+    val deckartenViewModel: DeckartenViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
-    val dynamische by dynamischeViewModel.dynamisch.collectAsState()
-    val isLoading by dynamischeViewModel.isLoading.collectAsState()
+    val dynamische by deckartenViewModel.dynamische.collectAsState()
+    val isLoading by deckartenViewModel.isLoading.collectAsState()
 
     val deckung = deckungen.find { it.id == deckungId }
 
