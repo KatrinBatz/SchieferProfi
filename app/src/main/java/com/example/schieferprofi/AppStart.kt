@@ -14,16 +14,30 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.schieferprofi.ui.components.DetailedDrawer
-import com.example.schieferprofi.ui.screen.DetailAltdeutschScreen
-import com.example.schieferprofi.ui.screen.DetailBogenschnittScreen
-import com.example.schieferprofi.ui.screen.DetailDynamischeRechteckScreen
-import com.example.schieferprofi.ui.screen.DetailDynamischeScreen
-import com.example.schieferprofi.ui.screen.DetailGeschlaufteScreen
 import com.example.schieferprofi.ui.screen.HomeScreen
 import com.example.schieferprofi.ui.screen.LexikonScreen
 import com.example.schieferprofi.ui.screen.PlanungshilfeScreen
 import com.example.schieferprofi.ui.screen.QuizScreen
 import com.example.schieferprofi.ui.screen.WinkelmesserScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailAltdeutschScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailBogenschnittScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailDynamischeRechteckScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailDynamischeScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailGeschlaufteScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailGezogeneScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailHorizontaleScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailKettengebindeScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailLineareScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailRechteckDoppelScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailSchuppenScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailSpezialFischschuppenScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailSpitzwinkelScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailUniversalScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailUnterlegteScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailVariableScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailWaagerechteScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailWabenScreen
+import com.example.schieferprofi.ui.screen.detailscreen.DetailWildeScreen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -75,28 +89,25 @@ fun AppStart() {
                     val deckungId = backStackEntry.arguments?.getString("deckungId") ?: ""
                     when (deckungId) {
                         "altdeutsche" -> DetailAltdeutschScreen(deckungId, navController)
-//                        "wilde" -> TODO() // Dein Screen für wilde Deckung
-//                        "schuppen" -> TODO()
-//                        "spitzwinkel" -> TODO()
                         "bogenschnitt" -> DetailBogenschnittScreen(deckungId, navController)
-//                        "universal" -> TODO()
-//                        "rechteck-doppeldeckung" -> TODO()
-                        "dynamische-rechteck-doppeldeckung" -> DetailDynamischeRechteckScreen(
-                            deckungId,
-                            navController
-                        )
-//                        "wilde-rechteck-doppeldeckung" -> TODO()
-//                        "spezial-fischschuppen" -> TODO()
-//                        "waben" -> TODO()
-//                        "gezogene" -> TODO()
-//                        "waagerechte" -> TODO()
-                        "geschlaufte" -> DetailGeschlaufteScreen(deckungId, navController)
-//                        "horizontale" -> TODO()
                         "dynamische" -> DetailDynamischeScreen(deckungId, navController)
-//                        "variable" -> TODO()
-//                        "unterlegte" -> TODO()
-//                        "lineare" -> TODO()
-//                        "kettengebinde" -> TODO()
+                        "dynamische-rechteck-doppeldeckung" -> DetailDynamischeRechteckScreen(deckungId, navController)
+                        "geschlaufte" -> DetailGeschlaufteScreen(deckungId, navController)
+                        "gezogene" -> DetailGezogeneScreen(deckungId, navController)
+                        "horizontale" -> DetailHorizontaleScreen(deckungId, navController)
+                        "kettengebinde" -> DetailKettengebindeScreen(deckungId, navController)
+                        "lineare" -> DetailLineareScreen(deckungId, navController)
+                        "rechteck-doppeldeckung" -> DetailRechteckDoppelScreen(deckungId, navController)
+                        "schuppen" -> DetailSchuppenScreen(deckungId, navController)
+                        "spezial-fischschuppen" -> DetailSpezialFischschuppenScreen(deckungId, navController)
+                        "spitzwinkel" -> DetailSpitzwinkelScreen( deckungId, navController)
+                        "universal" -> DetailUniversalScreen(deckungId, navController)
+                        "unterlegte" -> DetailUnterlegteScreen(deckungId, navController)
+                        "variable" -> DetailVariableScreen(deckungId, navController)
+                        "waben" -> DetailWabenScreen(deckungId, navController)
+                        "waagerechte" -> DetailWaagerechteScreen(deckungId, navController)
+                        "wilde-rechteck-doppeldeckung" -> DetailWildeScreen(deckungId, navController)
+
                         else -> Text("Detail nicht gefunden!")
                     }
                 }

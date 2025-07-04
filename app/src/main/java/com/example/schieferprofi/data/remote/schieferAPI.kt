@@ -106,9 +106,8 @@ private fun main() = runBlocking {
     val api = SchieferAPI.retrofitService
 
     try {
-        val response = api.getDeckungen()
-        val response2 = api.getAltdeutsche()
-        print("API response: $response /nAPI response2: $response2")
+        val response = api.getRechteckDoppeldeckung()
+        print("API response: $response")
     } catch (e: Exception) {
         println("API error: ${e.message}")
     }

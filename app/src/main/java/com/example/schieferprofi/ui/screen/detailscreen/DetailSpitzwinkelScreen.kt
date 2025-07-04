@@ -1,4 +1,4 @@
-package com.example.schieferprofi.ui.screen
+package com.example.schieferprofi.ui.screen.detailscreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
@@ -12,18 +12,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
-import com.example.schieferprofi.ui.components.GeschlaufteDeckungCard
+import com.example.schieferprofi.ui.components.SpitzwinkelCard
 import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DetailGeschlaufteScreen(deckungId: String, navController: NavController) {
+fun DetailSpitzwinkelScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
     val deckartenViewModel: DeckartenViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
-    val info by deckartenViewModel.geschlaufte.collectAsState()
+    val spitzwinkel by deckartenViewModel.spitzwinkel.collectAsState()
     val isLoading by deckartenViewModel.isLoading.collectAsState()
 
     val deckung = deckungen.find { it.id == deckungId }
@@ -39,10 +39,7 @@ fun DetailGeschlaufteScreen(deckungId: String, navController: NavController) {
         when {
             isLoading -> Text("Lade Details…")
             deckung == null -> Text("Deckung nicht gefunden!")
-            else -> GeschlaufteDeckungCard(
-                info = info,
-                deckung = deckung
-            )
+            else -> SpitzwinkelCard(spitzwinkel = spitzwinkel, deckung = deckung)
         }
     }
 }

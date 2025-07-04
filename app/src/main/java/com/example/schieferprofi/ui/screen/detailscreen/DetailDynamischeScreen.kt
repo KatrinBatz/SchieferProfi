@@ -1,4 +1,4 @@
-package com.example.schieferprofi.ui.screen
+package com.example.schieferprofi.ui.screen.detailscreen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
@@ -12,19 +12,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
-import com.example.schieferprofi.ui.components.DynamischeRechteckDoppeldeckungCard
+import com.example.schieferprofi.ui.components.DynamischeDeckungCard
 import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun DetailDynamischeRechteckScreen(deckungId: String, navController: NavController) {
+fun DetailDynamischeScreen(deckungId: String, navController: NavController) {
     val deckungViewModel: DeckungViewModel = koinViewModel()
-    val dynamischViewModel: DeckartenViewModel = koinViewModel()
+    val deckartenViewModel: DeckartenViewModel = koinViewModel()
 
     val deckungen by deckungViewModel.deckungen.collectAsState()
-    val info by dynamischViewModel.dynamischeRechteck.collectAsState()
-    val isLoading by dynamischViewModel.isLoading.collectAsState()
+    val dynamische by deckartenViewModel.dynamische.collectAsState()
+    val isLoading by deckartenViewModel.isLoading.collectAsState()
 
     val deckung = deckungen.find { it.id == deckungId }
 
@@ -39,7 +39,7 @@ fun DetailDynamischeRechteckScreen(deckungId: String, navController: NavControll
         when {
             isLoading -> Text("Lade Details…")
             deckung == null -> Text("Deckung nicht gefunden!")
-            else -> DynamischeRechteckDoppeldeckungCard(info = info, deckung = deckung)
+            else -> DynamischeDeckungCard(dynamisch = dynamische, deckung = deckung)
         }
     }
 }

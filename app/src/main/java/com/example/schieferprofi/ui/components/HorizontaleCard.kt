@@ -1,10 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,16 +18,13 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
 import com.example.schieferprofi.data.model.Deckung
-import com.example.schieferprofi.data.model.DynamischeRechteckDoppeldeckungInfo
+import com.example.schieferprofi.data.model.HorizontaleDeckungInfo
 import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferSecondaryStyle
 import com.example.schieferprofi.util.schieferTitleStyle
 
 @Composable
-fun DynamischeRechteckDoppeldeckungCard(
-    dynamischeRechteck: DynamischeRechteckDoppeldeckungInfo,
-    deckung: Deckung
-) {
+fun HorizontaleCard(horizontale: HorizontaleDeckungInfo, deckung: Deckung) {
     GlassmorphismCard {
         LazyColumn(
             modifier = Modifier.padding(16.dp)
@@ -44,11 +38,7 @@ fun DynamischeRechteckDoppeldeckungCard(
                         .height(200.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
-                        .shadow(
-                            elevation = 20.dp,
-                            shape = RoundedCornerShape(12.dp),
-                            clip = false
-                        ),
+                        .shadow(20.dp, RoundedCornerShape(12.dp), clip = false),
                     contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -59,48 +49,49 @@ fun DynamischeRechteckDoppeldeckungCard(
                 Text("Verwendung: ${deckung.verwendung.joinToString()}", style = schieferSecondaryStyle())
                 Text("Schwierigkeitsgrad: ${deckung.schwierigkeitsgrad}", style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(8.dp))
+
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 4.dp),
                     thickness = DividerDefaults.Thickness,
                     color = DividerDefaults.color
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-            }
-            item {
-                Text("Beschreibung", style = schieferTitleStyle())
-                Text(dynamischeRechteck.beschreibung, style = schieferBodyStyle())
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Deckunterlage: ${dynamischeRechteck.deckunterlage}", style = schieferBodyStyle())
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Deckbild: ${dynamischeRechteck.deckbild}", style = schieferBodyStyle())
-                Text("Verlegeschema: ${dynamischeRechteck.verlegeschema}", style = schieferBodyStyle())
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Dachneigungs-Hinweis: ${dynamischeRechteck.dachneigungHinweis}", style = schieferSecondaryStyle())
+
+                Text("📘 Beschreibung", style = schieferTitleStyle())
+                Text(horizontale.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
-            }
-            item {
-                Text("Befestigung", style = schieferTitleStyle())
-                Text("Dach: ${dynamischeRechteck.befestigung.dach}", style = schieferBodyStyle())
-                Text("Ort/Grat: ${dynamischeRechteck.befestigung.ortGrat}", style = schieferBodyStyle())
+
+                Text("🧱 Deckunterlage", style = schieferTitleStyle())
+                Text(horizontale.deckunterlage, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
-            }
-            item {
-                Text("Höhenüberdeckung", style = schieferTitleStyle())
-                // Hier kannst du info.hoehenueberdeckung ggf. als Map ausgeben
-                // Zum Beispiel, falls es key-value-pairs gibt:
-                // info.hoehenueberdeckung.map.forEach { (key, value) -> ... }
-            }
-            item {
-                Text("Fugenversatz: ${dynamischeRechteck.fugenversatz} mm", style = schieferSecondaryStyle())
+
+                Text("🖼️ Deckbild", style = schieferTitleStyle())
+                Text(horizontale.deckbild, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
+
+                Text("🔩 Befestigung", style = schieferTitleStyle())
+                Text(horizontale.befestigung, style = schieferBodyStyle())
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text("📏 Mindest-Höhenüberdeckung", style = schieferTitleStyle())
+                Text("${horizontale.mindestHoehenueberdeckung} mm", style = schieferBodyStyle())
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text("✅ Vorteile", style = schieferTitleStyle())
+                horizontale.vorteile.forEach { vorteil ->
+                    Text("• $vorteil", style = schieferBodyStyle())
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text("📦 Formate & Materialbedarf", style = schieferTitleStyle())
             }
-            item {
-                Text("Formate", style = schieferTitleStyle())
-            }
-            items(dynamischeRechteck.formate) { format ->
-                Text("• Steinhöhe: ${format.steinhoehe} mm", style = schieferBodyStyle())
-                Text("  Gebindehöhen: ${format.gebindehoehe.joinToString()}", style = schieferSecondaryStyle())
-                Text("  Formate: ${format.formate.joinToString()}", style = schieferSecondaryStyle())
+            items(horizontale.formate) { format ->
+                Text("• Format: ${format.format}", style = schieferBodyStyle())
+                Text("  Schieferbedarf: ${format.schieferbedarfProM2} Stück/m²", style = schieferSecondaryStyle())
+                Text("  Hakenverbrauch: ${format.hakenverbrauchProM2} Stück/m²", style = schieferSecondaryStyle())
+                Text("  Lattenabstand: ${format.lattenabstandCm} cm", style = schieferSecondaryStyle())
+                Text("  Lattenverbrauch: ${format.lattenverbrauchProM2} lfm/m²", style = schieferSecondaryStyle())
+                Text("  Gewicht pro 1000 Stück: ${format.gewichtPro1000Stk} kg", style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
