@@ -12,6 +12,9 @@ import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -22,18 +25,27 @@ import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
 import com.example.schieferprofi.data.model.Deckung
 import com.example.schieferprofi.data.model.DynamischeRechteckDoppeldeckungInfo
+import com.example.schieferprofi.data.model.FavoritenDeckart
 import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferSecondaryStyle
 import com.example.schieferprofi.util.schieferTitleStyle
+import com.example.schieferprofi.viewmodel.FavoritenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DynamischeRechteckDoppeldeckungCard(
     dynamischeRechteck: DynamischeRechteckDoppeldeckungInfo,
-    deckung: Deckung
+    deckung: Deckung,
+    viewModel: FavoritenViewModel = koinViewModel()
 ) {
+    val favoriten by viewModel.favoriten.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.ladeFavoriten()
+    }
     GlassmorphismCard {
         LazyColumn(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp).fillMaxWidth()
         ) {
             item {
                 AsyncImage(
@@ -53,6 +65,14 @@ fun DynamischeRechteckDoppeldeckungCard(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.name, style = schieferTitleStyle())
+                FavoritenIconButton(
+                    deckart = FavoritenDeckart(
+                        idDeckart = deckung.id,
+                        deckartName = deckung.name,
+                        deckartBeschreibung = deckung.beschreibung,
+                        deckartBild = deckung.bildUrl
+                    )
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))

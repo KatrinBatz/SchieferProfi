@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -53,7 +54,8 @@ fun DeckungCard(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = deckung.name,
-                style = schieferTitleStyle()
+                style = schieferTitleStyle(),
+                textDecoration = TextDecoration.Underline
             )
             Spacer(modifier = Modifier.height(8.dp))
 

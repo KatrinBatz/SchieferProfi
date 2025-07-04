@@ -18,8 +18,7 @@ fun DeckungList(
     onDeckungClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-//    val deckungsViewModel: DeckungViewModel = koinViewModel()
-//    val deckungen by deckungsViewModel.deckungen.collectAsState()
+
 
     LazyColumn(modifier = modifier.fillMaxWidth().padding(horizontal = 12.dp)) {
         items(

@@ -40,7 +40,7 @@ fun DetailGeschlaufteScreen(deckungId: String, navController: NavController) {
             isLoading -> Text("Lade Details…")
             deckung == null -> Text("Deckung nicht gefunden!")
             else -> GeschlaufteDeckungCard(
-                info = geschlaufte,
+                geschlaufte = geschlaufte,
                 deckung = deckung
             )
         }
