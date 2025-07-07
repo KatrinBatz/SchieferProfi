@@ -104,6 +104,22 @@ fun DetailedDrawer(
                     NavigationDrawerItem(
                         label = {
                             Text(
+                                text = "Gebindesteigung",
+                                fontFamily = FontFamily(Font(R.font.cormorant_bold)),
+                                fontSize = 22.sp,
+                                color = colorResource(R.color.hellgrau)
+                            )
+                        },
+                        selected = false,
+                        onClick = {
+                            scope.launch { drawerState.close() }
+                            navController.navigate("gebindeteigung")
+                        }
+                    )
+
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
                                 text = "Favoriten",
                                 fontFamily = FontFamily(Font(R.font.cormorant_bold)),
                                 fontSize = 22.sp,

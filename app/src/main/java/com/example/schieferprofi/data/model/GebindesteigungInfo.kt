@@ -6,7 +6,8 @@ import kotlinx.serialization.Serializable
 data class GebindesteigungInfo(
     val erklaerungRechnerisch: String = "",
     val erklaerungKonstruktiv: String = "",
-    val tabelle: List<Gebindesteigungswert> = emptyList()
+    val tabelle: List<Gebindesteigungswert> = emptyList(),
+    val bildUrl: String = ""
 )
 
 @Serializable

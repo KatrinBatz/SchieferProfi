@@ -24,7 +24,6 @@ fun FavoritenIconButton(
     val isFavorit = favoriten.any { it.idDeckart == deckart.idDeckart }
     val icon = if (isFavorit) Icons.Default.Star else Icons.Outlined.Star
     val tint = if (isFavorit) colorResource(R.color.ziegelrot) else colorResource(R.color.hellgrau)
-//        Color.Red else Color.Gray
 
     IconButton(onClick = { viewModel.toggleFavorit(deckart) }) {
         Icon(imageVector = icon, contentDescription = "Favorit", tint = tint)

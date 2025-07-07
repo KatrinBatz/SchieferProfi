@@ -13,8 +13,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.schieferprofi.data.model.GebindesteigungInfo
 import com.example.schieferprofi.ui.components.DetailedDrawer
 import com.example.schieferprofi.ui.screen.FavoritenScreen
+import com.example.schieferprofi.ui.screen.GebindesteigungScreen
 import com.example.schieferprofi.ui.screen.HomeScreen
 import com.example.schieferprofi.ui.screen.LexikonScreen
 import com.example.schieferprofi.ui.screen.PlanungshilfeScreen
@@ -69,6 +71,12 @@ fun AppStart() {
 
                 composable("lexikon") {
                     LexikonScreen(navController)
+                }
+
+                composable("gebindeteigung") {
+                    GebindesteigungScreen(
+                        navController = navController
+                    )
                 }
 
                 composable("winkelmesser") {
