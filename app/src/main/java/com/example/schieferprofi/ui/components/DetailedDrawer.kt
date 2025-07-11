@@ -1,7 +1,5 @@
 package com.example.schieferprofi.ui.components
 
-import android.R.attr.label
-import android.R.attr.onClick
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -114,6 +112,22 @@ fun DetailedDrawer(
                         onClick = {
                             scope.launch { drawerState.close() }
                             navController.navigate("gebindeteigung")
+                        }
+                    )
+
+                    NavigationDrawerItem(
+                        label = {
+                            Text(
+                                text = "Deckungsregelwerk",
+                                fontFamily = FontFamily(Font(R.font.cormorant_bold)),
+                                fontSize = 22.sp,
+                                color = colorResource(R.color.hellgrau)
+                            )
+                        },
+                        selected = false,
+                        onClick = {
+                            scope.launch { drawerState.close() }
+                            navController.navigate("deckungsregelwerk")
                         }
                     )
 

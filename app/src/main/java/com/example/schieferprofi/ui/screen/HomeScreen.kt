@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,16 +20,10 @@ import androidx.compose.ui.unit.sp
 import com.example.schieferprofi.R
 
 @Composable
-fun HomeScreen(
-    onNavigateToLexikon: () -> Unit,
-    onNavigateToTilt: () -> Unit,
-    onNavigateToFavoriten: () -> Unit,
-    onNavigateToQuiz: () -> Unit
-) {
+fun HomeScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-//            .padding(32.dp)
     ) {
         Image(
             painter = painterResource(R.drawable.schieferbackground1),
@@ -58,26 +51,6 @@ fun HomeScreen(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
-
-//            androidx.compose.material3.Button(onClick = onNavigateToLexikon) {
-//                Text("📘 Lexikon")
-//            }
-//
-//            androidx.compose.material3.Button(onClick = onNavigateToTilt) {
-//                Text("📐 Winkelmesser")
-//            }
-//
-//            androidx.compose.material3.Button(onClick = onNavigateToFavoriten) {
-//                Text("⭐️ Favoriten")
-//            }
-//
-////            androidx.compose.material3.Button(onClick = onNavigateToBilderkennung) {
-////                Text("📷 Bilderkennung")
-////            }
-//
-//            androidx.compose.material3.Button(onClick = onNavigateToQuiz) {
-//                Text("🎓 Quiz")
-//            }
         }
     }
 }

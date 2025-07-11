@@ -12,8 +12,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -38,7 +36,6 @@ fun SpezialFischschuppeCard(
     viewModel: FavoritenViewModel = koinViewModel()
     ) {
     GlassmorphismCard {
-        val favoriten by viewModel.favoriten.collectAsState()
 
         LaunchedEffect(Unit) {
             viewModel.ladeFavoriten()
@@ -112,7 +109,7 @@ fun SpezialFischschuppeCard(
 
             items(fischschuppen.steinformatTabelle) {
                 Text("• Breite: ${it.breite} mm, Höhe: ${it.hoehe} mm", style = schieferBodyStyle())
-                Text("  Schnürrabstand: ${it.schnürrabstand} cm", style = schieferSecondaryStyle())
+                Text("  Schnürrabstand: ${it.schnuerrabstand} cm", style = schieferSecondaryStyle())
                 Text("  Schieferbedarf: ${it.schieferbedarfProM2} Stk/m²", style = schieferSecondaryStyle())
                 Text("  Gewicht: ${it.gewichtPro1000} kg/1000", style = schieferSecondaryStyle())
                 Text("  Stück pro Kiste: ${it.stueckProKiste}", style = schieferSecondaryStyle())

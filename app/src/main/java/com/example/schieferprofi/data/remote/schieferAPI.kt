@@ -50,8 +50,8 @@ interface APIService {
     @GET("lookup.php")
     suspend fun getDeckungById(@Query("i") id: String): Deckung
 
-    @GET("schiefer/deckungsregelwerk")
-    suspend fun getDeckungsregelwerk(): DeckungsRegelwerk
+    @GET("/deckungs_regelwerk")
+    suspend fun getDeckungsregelwerk(): List<DeckungsRegelwerk>
 
     @GET("schiefer/gebindesteigung")
     suspend fun getGebindesteigung(): GebindesteigungInfo
@@ -59,42 +59,63 @@ interface APIService {
     @GET("schiefer/gebindesteigung1")
     suspend fun getGebindesteigung1(): Gebindesteigung1Info
 
+//    @GET("/quiz")
+//    suspend fun getQuiz(): List<Quiz>
+
     @GET("schiefer/altdeutsch")
     suspend fun getAltdeutsche(): AltdeutscheDeckungInfo
+
     @GET("schiefer/bogenschnitt")
     suspend fun getBogenschnitt(): BogenschnittDeckungInfo
+
     @GET("schiefer/dynamische")
     suspend fun getDynamische(): DynamischeDeckungInfo
+
     @GET("schiefer/dynamisch-rechteck")
     suspend fun getDynamischRechteck(): DynamischeRechteckDoppeldeckungInfo
+
     @GET("schiefer/geschlaufe")
     suspend fun getGeschlaufte(): GeschlaufteDeckungInfo
+
     @GET("schiefer/gezogene")
     suspend fun getGezogene(): GezogeneDeckungInfo
+
     @GET("schiefer/horizontale")
     suspend fun getHorizontale(): HorizontaleDeckungInfo
+
     @GET("schiefer/kettengebinde")
     suspend fun getKettengebinde(): KettengebindeInfo
+
     @GET("schiefer/lineare")
     suspend fun getLineare(): LineareDeckungInfo
+
     @GET("schiefer/rechteck")
     suspend fun getRechteckDoppeldeckung(): RechteckDoppeldeckungInfo
+
     @GET("schiefer/schuppen")
     suspend fun getSchuppen(): SchuppenDeckungInfo
+
     @GET("schiefer/spezial-fischschuppen")
     suspend fun getFischschuppe(): SpezialFischschuppeDeckungInfo
+
     @GET("schiefer/spitzwinkel")
     suspend fun getSpitzwinkel(): SpitzwinkelDeckungInfo
+
     @GET("schiefer/universal")
     suspend fun getUniversal(): UniversalDeckungInfo
+
     @GET("schiefer/unterlegte")
     suspend fun getUnterlegte(): UnterlegteDeckungInfo
+
     @GET("schiefer/variable")
     suspend fun getVariable(): VariableDeckungInfo
+
     @GET("schiefer/waagerecht")
     suspend fun getWaagerecht(): WaagerechteDeckungInfo
+
     @GET("schiefer/waben")
     suspend fun getWaben(): WabenDeckungInfo
+
     @GET("schiefer/wilde-rechteck")
     suspend fun getRechteck(): WildeRechteckDoppeldeckungInfo
 }
@@ -110,7 +131,7 @@ private fun main() = runBlocking {
     val api = SchieferAPI.retrofitService
 
     try {
-        val response = api.getRechteckDoppeldeckung()
+        val response = api.getDeckungsregelwerk()
         print("API response: $response")
     } catch (e: Exception) {
         println("API error: ${e.message}")

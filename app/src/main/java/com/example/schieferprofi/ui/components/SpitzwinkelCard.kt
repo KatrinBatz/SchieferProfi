@@ -12,8 +12,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -37,7 +35,6 @@ fun SpitzwinkelCard(
     deckung: Deckung,
     viewModel: FavoritenViewModel = koinViewModel()
     ) {
-    val favoriten by viewModel.favoriten.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.ladeFavoriten()
@@ -106,9 +103,9 @@ fun SpitzwinkelCard(
 
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("🔣 Formel-Parameter", style = schieferTitleStyle())
-                Text("• H: ${spitzwinkel.parameterErklärung.H}", style = schieferBodyStyle())
-                Text("• A: ${spitzwinkel.parameterErklärung.A}", style = schieferBodyStyle())
-                Text("• M: ${spitzwinkel.parameterErklärung.M}", style = schieferBodyStyle())
+                Text("• H: ${spitzwinkel.parameterErklaerung.h}", style = schieferBodyStyle())
+                Text("• A: ${spitzwinkel.parameterErklaerung.a}", style = schieferBodyStyle())
+                Text("• M: ${spitzwinkel.parameterErklaerung.m}", style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
                 Text("🏰 Ort, Grat & First", style = schieferTitleStyle())
@@ -125,7 +122,7 @@ fun SpitzwinkelCard(
 
             items(spitzwinkel.masseUndStueckzahlen) {
                 Text("• Größe: ${it.groesseCm}", style = schieferBodyStyle())
-                Text("  Nummer: ${it.nummer}", style = schieferSecondaryStyle())
+                Text("  Nummer: ${it.nummers}", style = schieferSecondaryStyle())
                 Text("  Mindest-Dachneigung: ${it.mindDachneigungGrad}", style = schieferSecondaryStyle())
                 Text("  Bedarf: ${it.bedarfProM2} Stk/m²", style = schieferSecondaryStyle())
                 Text("  Abschnitt: ${it.abschnittMm} mm", style = schieferSecondaryStyle())
@@ -141,10 +138,10 @@ fun SpitzwinkelCard(
 
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("🔣 Parameter Materialbedarf", style = schieferTitleStyle())
-                Text("• L: ${spitzwinkel.parameterErklaerungMaterialbedarf.L}", style = schieferBodyStyle())
-                Text("• A: ${spitzwinkel.parameterErklaerungMaterialbedarf.A}", style = schieferBodyStyle())
-                Text("• Hs: ${spitzwinkel.parameterErklaerungMaterialbedarf.Hs}", style = schieferBodyStyle())
-                Text("• B: ${spitzwinkel.parameterErklaerungMaterialbedarf.B}", style = schieferBodyStyle())
+                Text("• L: ${spitzwinkel.parameterErklaerungMaterialbedarf.l}", style = schieferBodyStyle())
+                Text("• A: ${spitzwinkel.parameterErklaerungMaterialbedarf.a}", style = schieferBodyStyle())
+                Text("• Hs: ${spitzwinkel.parameterErklaerungMaterialbedarf.hs}", style = schieferBodyStyle())
+                Text("• B: ${spitzwinkel.parameterErklaerungMaterialbedarf.b}", style = schieferBodyStyle())
             }
         }
     }

@@ -10,9 +10,9 @@ data class SpitzwinkelDeckungInfo(
     val befestigung: String = "",
     val ueberdeckung: SpitzwinkelUeberdeckung = SpitzwinkelUeberdeckung(),
     val schnuerabstandFormel: String = "",
-    val parameterErklärung: SpitzwinkelParameterErklaerung = SpitzwinkelParameterErklaerung(),
+    val parameterErklaerung: SpitzwinkelParameterErklaerung = SpitzwinkelParameterErklaerung(),
     val ortGratFirst: SpitzwinkelOrtGratFirst = SpitzwinkelOrtGratFirst(),
-    val masseUndStueckzahlen: List<SpitzwinkelMaße> = emptyList(),
+    val masseUndStueckzahlen: List<SpitzwinkelMasse> = emptyList(),
     val materialbedarfFormel: String = "",
     val parameterErklaerungMaterialbedarf: SpitzwinkelParameterMaterial = SpitzwinkelParameterMaterial()
 )
@@ -24,9 +24,9 @@ data class SpitzwinkelUeberdeckung(
 
 @Serializable
 data class SpitzwinkelParameterErklaerung(
-    val H: String = "",
-    val A: String = "",
-    val M: String = ""
+    val h: String = "",
+    val a: String = "",
+    val m: String = ""
 )
 
 @Serializable
@@ -38,8 +38,8 @@ data class SpitzwinkelOrtGratFirst(
 )
 
 @Serializable
-data class SpitzwinkelMaße(
-    val nummer: Int = 0,
+data class SpitzwinkelMasse(
+    val nummers: Int = 0,
     val groesseCm: String = "",
     val mindDachneigungGrad: String = "",
     val bedarfProM2: Double = 0.0,
@@ -50,8 +50,8 @@ data class SpitzwinkelMaße(
 
 @Serializable
 data class SpitzwinkelParameterMaterial(
-    val L: String = "",
-    val A: String = "",
-    val Hs: String = "",
-    val B: String = ""
+    val l: String = "",
+    val a: String = "",
+    val hs: String = "",
+    val b: String = ""
 )

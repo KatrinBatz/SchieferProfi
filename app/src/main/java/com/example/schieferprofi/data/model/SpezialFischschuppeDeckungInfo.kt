@@ -25,7 +25,7 @@ data class FischschuppeBefestigung(
 data class FischschuppenFormat(
     val breite: Int = 0,
     val hoehe: Int = 0,
-    val schnürrabstand: Double = 0.0,
+    val schnuerrabstand: Double = 0.0,
     val schieferbedarfProM2: Double = 0.0,
     val gewichtPro1000: Int = 0,
     val stueckProKiste: Int = 0

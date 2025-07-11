@@ -12,8 +12,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -37,7 +35,6 @@ fun WaagerechteCard(
     deckung: Deckung,
     viewModel: FavoritenViewModel = koinViewModel()
     ) {
-    val favoriten by viewModel.favoriten.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.ladeFavoriten()

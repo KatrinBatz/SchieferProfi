@@ -21,23 +21,9 @@ class FavoritenViewModel(
         }
     }
 
-    fun favoritenHinzufuegen(deckart: FavoritenDeckart) {
-        viewModelScope.launch {
-            repository.addDeckart(deckart)
-            ladeFavoriten()
-        }
-    }
-
     fun favoritenEntfernen(id: String) {
         viewModelScope.launch {
             repository.removeDeckart(id)
-            ladeFavoriten()
-        }
-    }
-
-    fun aktualisiereDeckart(deckart: FavoritenDeckart) {
-        viewModelScope.launch {
-            repository.updateDeckart(deckart)
             ladeFavoriten()
         }
     }

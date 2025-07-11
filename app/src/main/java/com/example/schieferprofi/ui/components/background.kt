@@ -9,7 +9,7 @@ import androidx.compose.ui.res.painterResource
 import com.example.schieferprofi.R
 
 @Composable
-fun Background(modifier: Modifier = Modifier) {
+fun Background() {
     Image(
         painter = painterResource(R.drawable.schieferbackground),
         contentDescription = "BackgroundImage",

@@ -1,8 +1,6 @@
 package com.example.schieferprofi.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,16 +18,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.GebindesteigungCard
 import com.example.schieferprofi.viewmodel.GebindesteigungViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun GebindesteigungScreen(
-    navController: NavController
-) {
+fun GebindesteigungScreen() {
     val gebindesteigungViewModel: GebindesteigungViewModel = koinViewModel()
     val gebindesteigung by gebindesteigungViewModel.gebindesteigung.collectAsState()
     val gebindesteigung1 by gebindesteigungViewModel.gebindesteigung1.collectAsState()

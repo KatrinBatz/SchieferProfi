@@ -13,13 +13,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.schieferprofi.data.model.GebindesteigungInfo
 import com.example.schieferprofi.ui.components.DetailedDrawer
+import com.example.schieferprofi.ui.screen.DeckungsRegelwerkScreen
 import com.example.schieferprofi.ui.screen.FavoritenScreen
 import com.example.schieferprofi.ui.screen.GebindesteigungScreen
 import com.example.schieferprofi.ui.screen.HomeScreen
 import com.example.schieferprofi.ui.screen.LexikonScreen
-import com.example.schieferprofi.ui.screen.PlanungshilfeScreen
 import com.example.schieferprofi.ui.screen.QuizScreen
 import com.example.schieferprofi.ui.screen.WinkelmesserScreen
 import com.example.schieferprofi.ui.screen.detailscreen.DetailAltdeutschScreen
@@ -61,12 +60,7 @@ fun AppStart() {
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable("home") {
-                    HomeScreen(
-                        onNavigateToLexikon = { navController.navigate("lexikon") },
-                        onNavigateToTilt = { navController.navigate("winkelmesser") },
-                        onNavigateToFavoriten = { navController.navigate("favoriten") },
-                        onNavigateToQuiz = { navController.navigate("quiz") }
-                    )
+                    HomeScreen()
                 }
 
                 composable("lexikon") {
@@ -74,9 +68,11 @@ fun AppStart() {
                 }
 
                 composable("gebindeteigung") {
-                    GebindesteigungScreen(
-                        navController = navController
-                    )
+                    GebindesteigungScreen()
+                }
+
+                composable("deckungsregelwerk") {
+                    DeckungsRegelwerkScreen()
                 }
 
                 composable("winkelmesser") {

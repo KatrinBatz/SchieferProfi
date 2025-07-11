@@ -7,11 +7,14 @@ import com.example.schieferprofi.data.repository.DeckartenRepositoryImpl
 import com.example.schieferprofi.data.repository.DeckartenRepositoryInterface
 import com.example.schieferprofi.data.repository.DeckungRepositoryImpl
 import com.example.schieferprofi.data.repository.DeckungRepositoryInterface
+import com.example.schieferprofi.data.repository.DeckungsRegelwerkRepositoryImpl
+import com.example.schieferprofi.data.repository.DeckungsRegelwerkRepositoryInterface
 import com.example.schieferprofi.data.repository.FavoritenRepository
 import com.example.schieferprofi.data.repository.GebindesteigungRepositoryImpl
 import com.example.schieferprofi.data.repository.GebindesteigungRepositoryInterface
 import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
+import com.example.schieferprofi.viewmodel.DeckungsRegelwerkViewModel
 import com.example.schieferprofi.viewmodel.FavoritenViewModel
 import com.example.schieferprofi.viewmodel.GebindesteigungViewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -25,7 +28,7 @@ val appModule = module {
 
     single {
         Room.databaseBuilder(
-            get(), // Context wird über Koin bereitgestellt
+            get(),
             AppDatabase::class.java,
             "app_database"
         ).build()
@@ -43,6 +46,10 @@ val appModule = module {
         GebindesteigungRepositoryImpl(get())
     }
 
+    single<DeckungsRegelwerkRepositoryInterface> {
+        DeckungsRegelwerkRepositoryImpl(get())
+    }
+
     single { get<AppDatabase>().favoritenDao() }
     single { FavoritenRepository(get()) }
 
@@ -51,5 +58,6 @@ val appModule = module {
     viewModelOf(::DeckartenViewModel)
     viewModelOf(::FavoritenViewModel)
     viewModelOf(::GebindesteigungViewModel)
+    viewModelOf(::DeckungsRegelwerkViewModel)
 
 }
