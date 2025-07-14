@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
 import com.example.schieferprofi.data.model.Deckung
-import com.example.schieferprofi.data.model.FavoritenDeckart
+import com.example.schieferprofi.data.entity.FavoritenDeckart
 import com.example.schieferprofi.data.model.WaagerechteDeckungInfo
 import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferSecondaryStyle

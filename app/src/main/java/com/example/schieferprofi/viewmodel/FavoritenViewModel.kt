@@ -2,7 +2,7 @@ package com.example.schieferprofi.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.schieferprofi.data.model.FavoritenDeckart
+import com.example.schieferprofi.data.entity.FavoritenDeckart
 import com.example.schieferprofi.data.repository.FavoritenRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

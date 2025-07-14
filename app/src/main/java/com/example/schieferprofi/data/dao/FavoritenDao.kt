@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.schieferprofi.data.model.FavoritenDeckart
+import com.example.schieferprofi.data.entity.FavoritenDeckart
 
 @Dao
 interface FavoritenDao {

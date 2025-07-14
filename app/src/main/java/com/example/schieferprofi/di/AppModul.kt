@@ -5,8 +5,7 @@ import com.example.schieferprofi.data.database.AppDatabase
 import com.example.schieferprofi.data.remote.SchieferAPI
 import com.example.schieferprofi.data.repository.DeckartenRepositoryImpl
 import com.example.schieferprofi.data.repository.DeckartenRepositoryInterface
-import com.example.schieferprofi.data.repository.DeckungRepositoryImpl
-import com.example.schieferprofi.data.repository.DeckungRepositoryInterface
+import com.example.schieferprofi.data.repository.DeckungRepository
 import com.example.schieferprofi.data.repository.DeckungsRegelwerkRepositoryImpl
 import com.example.schieferprofi.data.repository.DeckungsRegelwerkRepositoryInterface
 import com.example.schieferprofi.data.repository.FavoritenRepository
@@ -31,12 +30,11 @@ val appModule = module {
             get(),
             AppDatabase::class.java,
             "app_database"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
-    single<DeckungRepositoryInterface> {
-        DeckungRepositoryImpl(get())
-    }
+    single { DeckungRepository(api = get(), dao = get()) }
 
     single<DeckartenRepositoryInterface> {
         DeckartenRepositoryImpl(get())
@@ -52,6 +50,8 @@ val appModule = module {
 
     single { get<AppDatabase>().favoritenDao() }
     single { FavoritenRepository(get()) }
+    single { get<AppDatabase>().deckungDao() }
+
 
 
     viewModelOf(::DeckungViewModel)

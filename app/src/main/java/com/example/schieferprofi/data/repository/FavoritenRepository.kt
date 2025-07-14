@@ -1,7 +1,7 @@
 package com.example.schieferprofi.data.repository
 
 import com.example.schieferprofi.data.dao.FavoritenDao
-import com.example.schieferprofi.data.model.FavoritenDeckart
+import com.example.schieferprofi.data.entity.FavoritenDeckart
 
 class FavoritenRepository(private val dao: FavoritenDao) {
 

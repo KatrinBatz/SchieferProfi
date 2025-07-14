@@ -1,42 +1,35 @@
 package com.example.schieferprofi.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schieferprofi.data.model.Deckung
-import com.example.schieferprofi.data.repository.DeckungRepositoryInterface
+import com.example.schieferprofi.data.repository.DeckungRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DeckungViewModel(
-    private val deckungRepository: DeckungRepositoryInterface
+    private val repository: DeckungRepository
 ) : ViewModel() {
-    private val _deckungen = MutableStateFlow<List<Deckung>>(listOf())
-    val deckungen = _deckungen.asStateFlow()
 
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading
+    private val _deckungen = MutableStateFlow<List<Deckung>>(emptyList())
+    val deckungen: StateFlow<List<Deckung>> = _deckungen.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     init {
         fetchDeckungen()
     }
 
-    fun fetchDeckungen() {
+    private fun fetchDeckungen() {
         viewModelScope.launch {
             _isLoading.value = true
-            try {
-                val response = deckungRepository.getDeckungen()
-                _deckungen.value = response.sortedBy {it.name}
-
-            } catch (e: Exception) {
-                Log.e("DECKUNGEN", "Fehler beim Abrufen der Deckungen: ${e.localizedMessage}")
-            } finally {
-                _isLoading.value = false
-            }
+            _deckungen.value = repository
+                .getAllDeckungen()
+                .sortedBy { it.name }
+            _isLoading.value = false
         }
     }
 }
-
-

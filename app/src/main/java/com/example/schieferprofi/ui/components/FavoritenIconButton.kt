@@ -10,7 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.colorResource
 import com.example.schieferprofi.R
-import com.example.schieferprofi.data.model.FavoritenDeckart
+import com.example.schieferprofi.data.entity.FavoritenDeckart
 import com.example.schieferprofi.viewmodel.FavoritenViewModel
 import org.koin.androidx.compose.koinViewModel
 

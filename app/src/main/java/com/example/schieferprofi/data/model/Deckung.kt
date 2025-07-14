@@ -1,7 +1,9 @@
 package com.example.schieferprofi.data.model
 
 import com.squareup.moshi.Json
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Deckung(
     @Json(name = "_id")
 

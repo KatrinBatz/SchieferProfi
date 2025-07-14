@@ -1,33 +1,58 @@
 package com.example.schieferprofi.data.repository
 
 import android.util.Log
+import com.example.schieferprofi.data.dao.DeckungDao
+import com.example.schieferprofi.data.entity.DeckungEntity
 import com.example.schieferprofi.data.model.Deckung
 import com.example.schieferprofi.data.remote.APIService
 
-interface DeckungRepositoryInterface {
-    suspend fun getDeckungen(): List<Deckung>
-    suspend fun getDeckungById(id: String): Deckung
-}
+class DeckungRepository(
+    private val api: APIService,
+    private val dao: DeckungDao
+) {
+    private fun Deckung.toEntity(): DeckungEntity = DeckungEntity(
+        id = id,
+        name = name,
+        beschreibung = beschreibung,
+        bildUrl = bildUrl,
+        verwendung = verwendung,
+        schwierigkeitsgrad = schwierigkeitsgrad
+    )
 
-class DeckungRepositoryImpl(
-    private val apiService: APIService
-) : DeckungRepositoryInterface {
-
-    override suspend fun getDeckungen(): List<Deckung> {
-        return try {
-            apiService.getDeckungen()
+    private fun DeckungEntity.toModel(): Deckung = Deckung(
+        id = id,
+        name = name,
+        beschreibung = beschreibung,
+        bildUrl = bildUrl,
+        verwendung = verwendung,
+        schwierigkeitsgrad = schwierigkeitsgrad
+    )
+    suspend fun getAllDeckungen(): List<Deckung> {
+        val cachedEntities = dao.getAll()
+        val fetchedDeckungen = try {
+            api.getDeckungen()
         } catch (e: Exception) {
-            Log.e("DeckungsRepository", "Error fetching deckungen: ${e.message}")
-            emptyList()
+            Log.e("DeckungRepository", "API fehlgeschlagen, verwende Cache: ${e.message}")
+            return cachedEntities.map { it.toModel() }
         }
-    }
 
-    override suspend fun getDeckungById(id: String): Deckung {
-        return try {
-            apiService.getDeckungById(id)
-        } catch (e: Exception) {
-            Log.e("DeckungsRepository", "Error fetching deckungen by ID: ${e.message}")
-            Deckung("", "", "", "", emptyList(), "")
+        val cachedMap = cachedEntities.associateBy { it.id }
+        val updatedEntities = mutableListOf<DeckungEntity>()
+
+        for (deckung in fetchedDeckungen) {
+            val cached = cachedMap[deckung.id]
+            if (cached == null || cached != deckung.toEntity()) {
+                updatedEntities.add(deckung.toEntity())
+            }
         }
+
+        if (updatedEntities.isNotEmpty()) {
+            dao.insertAll(updatedEntities)
+            Log.d("DeckungRepository", "Cache aktualisiert: ${updatedEntities.size} Einträge geändert")
+        } else {
+            Log.d("DeckungRepository", "Keine Änderungen – verwende lokale Daten")
+        }
+
+        return dao.getAll().map { it.toModel() }
     }
 }
