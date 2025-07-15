@@ -30,10 +30,6 @@ fun DeckungsRegelwerkCard(
     GlassmorphismCard {
         Column(modifier = Modifier.padding(16.dp)) {
 
-            Text("📘 Deckungsregelwerk", style = schieferTitleStyle())
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // 🔹 Deckarten
             Text("🔹 Deckarten", style = schieferSecondaryStyle())
             regelwerk.deckarten.forEach { deckart ->
                 Spacer(modifier = Modifier.height(8.dp))
@@ -49,7 +45,6 @@ fun DeckungsRegelwerkCard(
                         .fillMaxWidth()
                         .height(180.dp)
                         .clip(RoundedCornerShape(6.dp))
-//                        .clickable { zoomImageUrl = deckart.bildUrl }
                         .shadow(6.dp),
                     contentScale = ContentScale.Crop
                 )
@@ -57,7 +52,6 @@ fun DeckungsRegelwerkCard(
 
             HorizontalDivider(Modifier.padding(vertical = 16.dp))
 
-            // 📐 Regeldachneigungen
             Text("📐 Regeldachneigungen", style = schieferTitleStyle())
             Spacer(modifier = Modifier.height(8.dp))
             regelwerk.regeldachneigungen.forEach {
@@ -72,7 +66,6 @@ fun DeckungsRegelwerkCard(
 
             HorizontalDivider(Modifier.padding(vertical = 16.dp))
 
-            // 🧰 Befestigungen
             Text("🧰 Befestigung", style = schieferTitleStyle())
             Text(regelwerk.befestigung.regeln, style = schieferBodyStyle())
             regelwerk.befestigung.tabelle.forEach {
@@ -86,7 +79,6 @@ fun DeckungsRegelwerkCard(
 
             HorizontalDivider(Modifier.padding(vertical = 16.dp))
 
-            // 📏 Überdeckungen
             Text("📏 Überdeckungen (Dach)", style = schieferTitleStyle())
             regelwerk.ueberdeckungen.dach.forEach {
                 Text("${it.deckart}: Höhe ${it.hoehe}, Seite: ${it.seite}, Latten: ${it.lattenabstand}, Stein: ${it.steingroesse}", style = schieferBodyStyle())
@@ -100,7 +92,6 @@ fun DeckungsRegelwerkCard(
 
             HorizontalDivider(Modifier.padding(vertical = 16.dp))
 
-            // 📦 Unterlagen
             Text("📦 Unterlagen", style = schieferTitleStyle())
             Text("Holz: ${regelwerk.unterlagen.holz}", style = schieferBodyStyle())
             Text("Holzwerkstoffe: ${regelwerk.unterlagen.holzwerkstoffe}", style = schieferBodyStyle())
@@ -113,27 +104,23 @@ fun DeckungsRegelwerkCard(
 
             HorizontalDivider(Modifier.padding(vertical = 16.dp))
 
-            // 🛠️ Werkzeuge
             Text("🛠️ Werkzeuge", style = schieferTitleStyle())
             regelwerk.werkzeuge.forEach {
                 Text("• $it", style = schieferBodyStyle())
             }
 
-            // ⚠️ Sicherheit
             if (regelwerk.sicherheitshinweise.isNotBlank()) {
                 HorizontalDivider(Modifier.padding(vertical = 16.dp))
                 Text("⚠️ Sicherheitshinweise", style = schieferTitleStyle())
                 Text(regelwerk.sicherheitshinweise, style = schieferBodyStyle())
             }
 
-            // 🧱 Verarbeitung
             if (regelwerk.verarbeitungshinweise.isNotBlank()) {
                 HorizontalDivider(Modifier.padding(vertical = 16.dp))
                 Text("🧱 Verarbeitungshinweise", style = schieferTitleStyle())
                 Text(regelwerk.verarbeitungshinweise, style = schieferBodyStyle())
             }
 
-            // 📖 Normverweise
             if (regelwerk.normVerweise.isNotEmpty()) {
                 HorizontalDivider(Modifier.padding(vertical = 16.dp))
                 Text("📖 Normverweise", style = schieferTitleStyle())
@@ -142,14 +129,12 @@ fun DeckungsRegelwerkCard(
                 }
             }
 
-            // 🧼 Pflege
             if (regelwerk.pflege.isNotBlank()) {
                 HorizontalDivider(Modifier.padding(vertical = 16.dp))
                 Text("🧼 Pflege", style = schieferTitleStyle())
                 Text(regelwerk.pflege, style = schieferBodyStyle())
             }
 
-            // ℹ️ Allgemeines
             if (regelwerk.allgemeines.isNotBlank()) {
                 HorizontalDivider(Modifier.padding(vertical = 16.dp))
                 Text("ℹ️ Allgemeines", style = schieferTitleStyle())

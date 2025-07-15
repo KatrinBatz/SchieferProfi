@@ -1,6 +1,8 @@
 package com.example.schieferprofi.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.GebindesteigungCard
+import com.example.schieferprofi.ui.components.WerkzeugLadeAnimation
 import com.example.schieferprofi.viewmodel.GebindesteigungViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -30,12 +33,8 @@ fun GebindesteigungScreen() {
     val gebindesteigung1 by gebindesteigungViewModel.gebindesteigung1.collectAsState()
     val isLoading by gebindesteigungViewModel.isLoading.collectAsState()
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(bottom = 16.dp)
-    ) {
-        item {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -44,23 +43,31 @@ fun GebindesteigungScreen() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Gebindesteigung",
+                    "Gebindesteigung",
                     color = colorResource(R.color.hellgrau),
                     fontFamily = FontFamily(Font(R.font.ptserif_bolditalic)),
                     fontSize = 24.sp,
                     textDecoration = TextDecoration.Underline
                 )
             }
-        }
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 16.dp)
+                    .padding(horizontal = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
-        item {
-            if (isLoading) {
-                Text("Lade das Schieferlexikon...", modifier = Modifier.padding(16.dp))
-            } else {
-                GebindesteigungCard(
-                    gebindesteigung = gebindesteigung,
-                    gebindesteigung1 = gebindesteigung1
-                )
+                item {
+                    if (isLoading) {
+                        WerkzeugLadeAnimation()
+                    } else {
+                        GebindesteigungCard(
+                            gebindesteigung = gebindesteigung,
+                            gebindesteigung1 = gebindesteigung1
+                        )
+                    }
+                }
             }
         }
     }

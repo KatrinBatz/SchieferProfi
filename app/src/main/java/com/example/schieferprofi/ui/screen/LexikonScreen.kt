@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.DeckungList
+import com.example.schieferprofi.ui.components.WerkzeugLadeAnimation
 import com.example.schieferprofi.viewmodel.DeckungViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -54,7 +55,7 @@ fun LexikonScreen(navController: NavController) {
             }
             when {
                 isLoading -> {
-                    CircularProgressIndicator()
+                    WerkzeugLadeAnimation()
                 }
 
                 else -> {

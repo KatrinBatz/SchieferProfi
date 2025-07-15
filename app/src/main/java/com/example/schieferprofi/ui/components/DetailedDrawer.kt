@@ -69,11 +69,11 @@ fun DetailedDrawer(
                             fontFamily = FontFamily(Font(R.font.cormorant_bold)),
                             fontSize = 26.sp)
                         Image(
-                            painter = painterResource(R.drawable.dachdeckerlogo),
+                            painter = painterResource(R.drawable.hammer1),
                             contentDescription = "Schiefer Logo",
                             modifier = Modifier
                                 .padding(16.dp)
-                                .height(25.dp)
+                                .height(50.dp)
                                 .clip(
                                     MaterialTheme.shapes.medium
 

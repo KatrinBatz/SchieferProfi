@@ -33,6 +33,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.GlassmorphismCard
+import com.example.schieferprofi.ui.components.WerkzeugLadeAnimation
 import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferTitleStyle
 import com.example.schieferprofi.viewmodel.FavoritenViewModel
@@ -62,7 +63,8 @@ fun FavoritenScreen(viewModel: FavoritenViewModel = koinViewModel(), navControll
             Spacer(modifier = Modifier.height(12.dp))
 
             if (favoriten.isEmpty()) {
-                Text("Keine Favoriten vorhanden.", style = schieferBodyStyle())
+//                Text("Keine Favoriten vorhanden.", style = schieferBodyStyle())
+                WerkzeugLadeAnimation()
             } else {
                 LazyColumn {
                     items(favoriten) { deckart ->

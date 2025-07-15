@@ -12,7 +12,7 @@
         android:icon="@mipmap/mylogo"
         android:label="@string/app_name"
         android:name=".di.App"
-        android:roundIcon="@mipmap/mylogo_round"
+        android:roundIcon="@mipmap/mylogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SchieferProfi"
         tools:targetApi="31">

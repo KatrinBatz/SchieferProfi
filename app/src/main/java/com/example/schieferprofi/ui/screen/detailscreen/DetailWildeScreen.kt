@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
+import com.example.schieferprofi.ui.components.WerkzeugLadeAnimation
 import com.example.schieferprofi.ui.components.WildeCard
 import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
@@ -37,7 +38,7 @@ fun DetailWildeScreen(deckungId: String, navController: NavController) {
             )
         }
         when {
-            isLoading -> Text("Lade Details…")
+            isLoading -> WerkzeugLadeAnimation()
             deckung == null -> Text("Deckung nicht gefunden!")
             else -> WildeCard(wilde = wilde, deckung = deckung)
         }

@@ -53,9 +53,6 @@ fun GebindesteigungCard(
     GlassmorphismCard {
         Column(modifier = Modifier.padding(16.dp)) {
 
-            Text("📐 Gebindesteigung", style = schieferTitleStyle())
-            Spacer(modifier = Modifier.height(8.dp))
-
             Text("🔹 Rechnerisch", style = schieferSecondaryStyle())
             Text(gebindesteigung.erklaerungRechnerisch, style = schieferBodyStyle())
             Spacer(modifier = Modifier.height(8.dp))

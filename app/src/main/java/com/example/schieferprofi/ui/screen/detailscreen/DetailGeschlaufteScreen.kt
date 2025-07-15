@@ -13,6 +13,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavController
 import com.example.schieferprofi.R
 import com.example.schieferprofi.ui.components.GeschlaufteDeckungCard
+import com.example.schieferprofi.ui.components.WerkzeugLadeAnimation
 import com.example.schieferprofi.viewmodel.DeckartenViewModel
 import com.example.schieferprofi.viewmodel.DeckungViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -37,7 +38,7 @@ fun DetailGeschlaufteScreen(deckungId: String, navController: NavController) {
             )
         }
         when {
-            isLoading -> Text("Lade Details…")
+            isLoading -> WerkzeugLadeAnimation()
             deckung == null -> Text("Deckung nicht gefunden!")
             else -> GeschlaufteDeckungCard(
                 geschlaufte = geschlaufte,
