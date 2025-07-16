@@ -16,7 +16,8 @@ class DeckungRepository(
         beschreibung = beschreibung,
         bildUrl = bildUrl,
         verwendung = verwendung,
-        schwierigkeitsgrad = schwierigkeitsgrad
+        schwierigkeitsgrad = schwierigkeitsgrad,
+        lastUpdated = System.currentTimeMillis()
     )
 
     private fun DeckungEntity.toModel(): Deckung = Deckung(
@@ -29,30 +30,22 @@ class DeckungRepository(
     )
     suspend fun getAllDeckungen(): List<Deckung> {
         val cachedEntities = dao.getAll()
+        val now = System.currentTimeMillis()
+        val isCacheValid = cachedEntities.isNotEmpty() && cachedEntities.all { now - it.lastUpdated < 90_000 }
+        if (isCacheValid) {
+            return cachedEntities.map { it.toModel() }
+        }
         val fetchedDeckungen = try {
             api.getDeckungen()
         } catch (e: Exception) {
             Log.e("DeckungRepository", "API fehlgeschlagen, verwende Cache: ${e.message}")
             return cachedEntities.map { it.toModel() }
         }
-
-        val cachedMap = cachedEntities.associateBy { it.id }
-        val updatedEntities = mutableListOf<DeckungEntity>()
-
-        for (deckung in fetchedDeckungen) {
-            val cached = cachedMap[deckung.id]
-            if (cached == null || cached != deckung.toEntity()) {
-                updatedEntities.add(deckung.toEntity())
-            }
-        }
-
+        val updatedEntities = fetchedDeckungen.map { it.toEntity() }
         if (updatedEntities.isNotEmpty()) {
             dao.insertAll(updatedEntities)
             Log.d("DeckungRepository", "Cache aktualisiert: ${updatedEntities.size} Einträge geändert")
-        } else {
-            Log.d("DeckungRepository", "Keine Änderungen – verwende lokale Daten")
         }
-
         return dao.getAll().map { it.toModel() }
     }
 }

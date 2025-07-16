@@ -25,13 +25,18 @@ import com.example.schieferprofi.data.model.WildeRechteckDoppeldeckungInfo
 import com.example.schieferprofi.data.repository.DeckartenRepositoryInterface
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 
 class DeckartenViewModel (
-    private val deckartenRepository: DeckartenRepositoryInterface
+    private val deckartenRepository: DeckartenRepositoryInterface,
+    private val context: Context
 ) : ViewModel() {
 
     private val _altdeutsches = MutableStateFlow(AltdeutscheDeckungInfo())
@@ -78,6 +83,27 @@ class DeckartenViewModel (
 
     init {
         fetchDeckarten()
+        startPolling()
+    }
+
+    private fun isInternetAvailable(): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+        
+        return activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+               activeNetwork.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+    }
+
+    private fun startPolling() {
+        viewModelScope.launch {
+            while (true) {
+                delay(90_000)
+                if (isInternetAvailable()) {
+                    fetchDeckarten()
+                }
+            }
+        }
     }
 
     fun fetchDeckarten() {

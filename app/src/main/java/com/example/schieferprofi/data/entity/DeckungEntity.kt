@@ -12,4 +12,5 @@ data class DeckungEntity(
     val bildUrl: String,
     val verwendung: List<String>,
     val schwierigkeitsgrad: String,
+    val lastUpdated: Long
 )

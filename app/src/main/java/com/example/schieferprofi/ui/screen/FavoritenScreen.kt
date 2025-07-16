@@ -63,7 +63,7 @@ fun FavoritenScreen(viewModel: FavoritenViewModel = koinViewModel(), navControll
             Spacer(modifier = Modifier.height(12.dp))
 
             if (favoriten.isEmpty()) {
-//                Text("Keine Favoriten vorhanden.", style = schieferBodyStyle())
+                Text("Keine Favoriten vorhanden.", style = schieferBodyStyle())
                 WerkzeugLadeAnimation()
             } else {
                 LazyColumn {

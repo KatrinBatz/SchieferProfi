@@ -8,9 +8,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 
 class DeckungViewModel(
-    private val repository: DeckungRepository
+    private val repository: DeckungRepository,
+    private val context: Context
 ) : ViewModel() {
 
     private val _deckungen = MutableStateFlow<List<Deckung>>(emptyList())
@@ -21,6 +26,7 @@ class DeckungViewModel(
 
     init {
         fetchDeckungen()
+        startPolling()
     }
 
     private fun fetchDeckungen() {
@@ -31,5 +37,23 @@ class DeckungViewModel(
                 .sortedBy { it.name }
             _isLoading.value = false
         }
+    }
+
+    private fun startPolling() {
+        viewModelScope.launch {
+            while (true) {
+                delay(90_000)
+                if (hasInternetConnection()) {
+                    fetchDeckungen()
+                }
+            }
+        }
+    }
+
+    private fun hasInternetConnection(): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }
