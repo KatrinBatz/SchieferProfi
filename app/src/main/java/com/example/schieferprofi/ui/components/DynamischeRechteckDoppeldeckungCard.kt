@@ -1,6 +1,8 @@
 package com.example.schieferprofi.ui.components
 
+import android.R.attr.text
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,11 +15,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
@@ -61,15 +65,23 @@ fun DynamischeRechteckDoppeldeckungCard(
                     contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(deckung.name, style = schieferTitleStyle())
-                FavoritenIconButton(
-                    deckart = FavoritenDeckart(
-                        idDeckart = deckung.id,
-                        deckartName = deckung.name,
-                        deckartBeschreibung = deckung.beschreibung,
-                        deckartBild = deckung.bildUrl
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Dynamische Rechteck-Doppel",
+                        style = schieferTitleStyle(),
+                        textDecoration = TextDecoration.Underline
                     )
-                )
+                    FavoritenIconButton(
+                        deckart = FavoritenDeckart(
+                            idDeckart = deckung.id,
+                            deckartName = deckung.name,
+                            deckartBeschreibung = deckung.beschreibung,
+                            deckartBild = deckung.bildUrl
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -84,7 +96,8 @@ fun DynamischeRechteckDoppeldeckungCard(
                 Spacer(modifier = Modifier.height(8.dp))
             }
             item {
-                Text("Beschreibung", style = schieferTitleStyle())
+                Text("Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(dynamischeRechteck.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("Deckunterlage: ${dynamischeRechteck.deckunterlage}", style = schieferBodyStyle())
@@ -96,13 +109,15 @@ fun DynamischeRechteckDoppeldeckungCard(
                 Spacer(modifier = Modifier.height(12.dp))
             }
             item {
-                Text("Befestigung", style = schieferTitleStyle())
+                Text("Befestigung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text("Dach: ${dynamischeRechteck.befestigung.dach}", style = schieferBodyStyle())
                 Text("Ort/Grat: ${dynamischeRechteck.befestigung.ortGrat}", style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
             }
             item {
-                Text("Höhenüberdeckung", style = schieferTitleStyle())
+                Text("Höhenüberdeckung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 // Hier kannst du info.hoehenueberdeckung ggf. als Map ausgeben
                 // Zum Beispiel, falls es key-value-pairs gibt:
                 // info.hoehenueberdeckung.map.forEach { (key, value) -> ... }
@@ -112,7 +127,8 @@ fun DynamischeRechteckDoppeldeckungCard(
                 Spacer(modifier = Modifier.height(12.dp))
             }
             item {
-                Text("Formate", style = schieferTitleStyle())
+                Text("Formate", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
             items(dynamischeRechteck.formate) { format ->
                 Text("• Steinhöhe: ${format.steinhoehe} mm", style = schieferBodyStyle())

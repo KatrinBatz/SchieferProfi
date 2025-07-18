@@ -1,6 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,11 +14,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
@@ -61,15 +64,23 @@ fun DynamischeDeckungCard(
                     contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(deckung.name, style = schieferTitleStyle())
-                FavoritenIconButton(
-                    deckart = FavoritenDeckart(
-                        idDeckart = deckung.id,
-                        deckartName = deckung.name,
-                        deckartBeschreibung = deckung.beschreibung,
-                        deckartBild = deckung.bildUrl
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        deckung.name,
+                        style = schieferTitleStyle(),
+                        textDecoration = TextDecoration.Underline
                     )
-                )
+                    FavoritenIconButton(
+                        deckart = FavoritenDeckart(
+                            idDeckart = deckung.id,
+                            deckartName = deckung.name,
+                            deckartBeschreibung = deckung.beschreibung,
+                            deckartBild = deckung.bildUrl
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -84,29 +95,34 @@ fun DynamischeDeckungCard(
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
-            // Dynamische Deckung spezifisch
             item {
-                Text("Beschreibung", style = schieferTitleStyle())
+                Text("Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(dynamisch.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("Deckunterlage: ${dynamisch.deckunterlage}", style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Hinweis zur Überdeckung:", style = schieferTitleStyle())
+                Text("Hinweis zur Überdeckung:", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(dynamisch.ueberdeckungHinweis, style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Hinweis zu Stoßfugen:", style = schieferTitleStyle())
+                Text("Hinweis zu Stoßfugen:", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(dynamisch.stosfugenHinweis, style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Hinweis zur Ortdeckung:", style = schieferTitleStyle())
+                Text("Hinweis zur Ortdeckung:", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(dynamisch.ortdeckungHinweis, style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Deckbild-Hinweis:", style = schieferTitleStyle())
+                Text("Deckbild-Hinweis:", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(dynamisch.deckbildHinweis, style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
             item {
-                Text("Standardformate", style = schieferTitleStyle())
+                Text("Standardformate", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
             items(dynamisch.standardformate) { format ->
                 Text("• $format", style = schieferBodyStyle())
@@ -114,7 +130,8 @@ fun DynamischeDeckungCard(
 
             item {
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("Befestigung", style = schieferTitleStyle())
+                Text("Befestigung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(dynamisch.befestigung.hinweis, style = schieferBodyStyle())
             }
             items(dynamisch.befestigung.befestigungNachBreite) { bef ->

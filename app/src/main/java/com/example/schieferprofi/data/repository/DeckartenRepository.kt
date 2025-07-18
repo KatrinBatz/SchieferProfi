@@ -1,28 +1,7 @@
 package com.example.schieferprofi.data.repository
 
 import WabenDeckungInfo
-import android.R.attr.name
 import android.util.Log
-import com.example.schieferprofi.data.model.AltdeutscheDeckungInfo
-import com.example.schieferprofi.data.model.BogenschnittDeckungInfo
-import com.example.schieferprofi.data.model.DynamischeDeckungInfo
-import com.example.schieferprofi.data.model.DynamischeRechteckDoppeldeckungInfo
-import com.example.schieferprofi.data.model.GebindesteigungInfo
-import com.example.schieferprofi.data.model.GeschlaufteDeckungInfo
-import com.example.schieferprofi.data.model.GezogeneDeckungInfo
-import com.example.schieferprofi.data.model.HorizontaleDeckungInfo
-import com.example.schieferprofi.data.model.KettengebindeInfo
-import com.example.schieferprofi.data.model.LineareDeckungInfo
-import com.example.schieferprofi.data.model.RechteckDoppeldeckungInfo
-import com.example.schieferprofi.data.model.SchuppenDeckungInfo
-import com.example.schieferprofi.data.model.SpezialFischschuppeDeckungInfo
-import com.example.schieferprofi.data.model.SpitzwinkelDeckungInfo
-import com.example.schieferprofi.data.model.UniversalDeckungInfo
-import com.example.schieferprofi.data.model.UnterlegteDeckungInfo
-import com.example.schieferprofi.data.model.VariableDeckungInfo
-import com.example.schieferprofi.data.model.WaagerechteDeckungInfo
-import com.example.schieferprofi.data.model.WildeRechteckDoppeldeckungInfo
-import com.example.schieferprofi.data.remote.APIService
 import com.example.schieferprofi.data.dao.AltdeutscheCacheDao
 import com.example.schieferprofi.data.dao.BogenschnittCacheDao
 import com.example.schieferprofi.data.dao.DynamischeCacheDao
@@ -61,6 +40,26 @@ import com.example.schieferprofi.data.entity.VariableCacheEntity
 import com.example.schieferprofi.data.entity.WaagerechteCacheEntity
 import com.example.schieferprofi.data.entity.WabenCacheEntity
 import com.example.schieferprofi.data.entity.WildeCacheEntity
+import com.example.schieferprofi.data.model.AltdeutscheDeckungInfo
+import com.example.schieferprofi.data.model.BogenschnittDeckungInfo
+import com.example.schieferprofi.data.model.DynamischeDeckungInfo
+import com.example.schieferprofi.data.model.DynamischeRechteckDoppeldeckungInfo
+import com.example.schieferprofi.data.model.GebindesteigungInfo
+import com.example.schieferprofi.data.model.GeschlaufteDeckungInfo
+import com.example.schieferprofi.data.model.GezogeneDeckungInfo
+import com.example.schieferprofi.data.model.HorizontaleDeckungInfo
+import com.example.schieferprofi.data.model.KettengebindeInfo
+import com.example.schieferprofi.data.model.LineareDeckungInfo
+import com.example.schieferprofi.data.model.RechteckDoppeldeckungInfo
+import com.example.schieferprofi.data.model.SchuppenDeckungInfo
+import com.example.schieferprofi.data.model.SpezialFischschuppeDeckungInfo
+import com.example.schieferprofi.data.model.SpitzwinkelDeckungInfo
+import com.example.schieferprofi.data.model.UniversalDeckungInfo
+import com.example.schieferprofi.data.model.UnterlegteDeckungInfo
+import com.example.schieferprofi.data.model.VariableDeckungInfo
+import com.example.schieferprofi.data.model.WaagerechteDeckungInfo
+import com.example.schieferprofi.data.model.WildeRechteckDoppeldeckungInfo
+import com.example.schieferprofi.data.remote.APIService
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -113,9 +112,8 @@ class DeckartenRepositoryImpl(
 ) : DeckartenRepositoryInterface {
 
     private val gson = Gson()
-    private val cacheTimeout = 90_000L // 90 Sekunden
+    private val cacheTimeout = 90_000L
 
-    // Hilfsfunktionen für Cache-Operationen
     private fun <T> T.toJson(): String = gson.toJson(this)
     
     private inline fun <reified T> String.fromJson(): T = gson.fromJson(this, object : TypeToken<T>() {}.type)

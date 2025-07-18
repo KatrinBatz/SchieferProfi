@@ -1,6 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,11 +14,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
@@ -62,15 +65,23 @@ fun AltdeutschCard(
                     contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(deckung.name, style = schieferTitleStyle())
-                FavoritenIconButton(
-                    deckart = FavoritenDeckart(
-                        idDeckart = deckung.id,
-                        deckartName = deckung.name,
-                        deckartBeschreibung = deckung.beschreibung,
-                        deckartBild = deckung.bildUrl
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        deckung.name,
+                        style = schieferTitleStyle(),
+                        textDecoration = TextDecoration.Underline
                     )
-                )
+                    FavoritenIconButton(
+                        deckart = FavoritenDeckart(
+                            idDeckart = deckung.id,
+                            deckartName = deckung.name,
+                            deckartBeschreibung = deckung.beschreibung,
+                            deckartBild = deckung.bildUrl
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -84,14 +95,16 @@ fun AltdeutschCard(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Text("🪨 Deckstein-Regeln", style = schieferTitleStyle())
+                Text("🪨 Deckstein-Regeln", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text("• Hiebarten: ${altdeutsch.decksteinRegeln.hiebarten.joinToString(", ")}", style = schieferBodyStyle())
                 Text("• Befestigung Dach: ${altdeutsch.decksteinRegeln.befestigungDach}", style = schieferBodyStyle())
                 Text("• Befestigung Wand: ${altdeutsch.decksteinRegeln.befestigungWand}", style = schieferBodyStyle())
                 Text("• Bemerkung: ${altdeutsch.decksteinRegeln.bemerkung}", style = schieferSecondaryStyle())
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("📏 Sortierung – Sparren", style = schieferTitleStyle())
+                Text("📏 Sortierung – Sparren", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
             items(altdeutsch.sortierung.sparren) { eintrag ->
                 Text(
@@ -100,7 +113,8 @@ fun AltdeutschCard(
                 )
             }
             item {
-                Text("📐 Sortierung – Wand", style = schieferTitleStyle())
+                Text("📐 Sortierung – Wand", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
             items(altdeutsch.sortierung.wand) { eintrag ->
                 Text(
@@ -111,7 +125,8 @@ fun AltdeutschCard(
             item { Spacer(modifier = Modifier.height(12.dp)) }
 
             item {
-                Text("🏛️ Monumentum-Zuordnung", style = schieferTitleStyle())
+                Text("🏛️ Monumentum-Zuordnung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
             items(altdeutsch.steinZuordnung.monumentum) { it ->
                 Text("• Sortierung: ${it.sortierung}", style = schieferBodyStyle())
@@ -119,7 +134,8 @@ fun AltdeutschCard(
                 Text("  Kehlsteine: ${it.kehlsteine.joinToString(", ")}", style = schieferSecondaryStyle())
             }
             item {
-                Text("🏗️ Intersin-Zuordnung", style = schieferTitleStyle())
+                Text("🏗️ Intersin-Zuordnung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
             items(altdeutsch.steinZuordnung.intersin) { it ->
                 Text("• Sortierung: ${it.sortierung}", style = schieferBodyStyle())

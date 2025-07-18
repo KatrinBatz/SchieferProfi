@@ -1,6 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,6 +33,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil3.compose.AsyncImage
@@ -68,7 +70,7 @@ fun GebindesteigungCard(
             )
 
             Spacer(modifier = Modifier.height(8.dp))
-            Text("📊 Tabelle: Dachneigung → Mindest-Gebindesteigung", style = schieferTitleStyle())
+            Text("📊 Tabelle: Dachneigung → Mindest-Gebindesteigung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
             Spacer(modifier = Modifier.height(8.dp))
 
             AsyncImage(
@@ -79,7 +81,12 @@ fun GebindesteigungCard(
                     .height(200.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .clickable { zoomImageUrl = gebindesteigung.bildUrl }
-                    .shadow(8.dp, RoundedCornerShape(12.dp)),
+                    .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
+                    .shadow(
+                        elevation = 20.dp,
+                        shape = RoundedCornerShape(12.dp),
+                        clip = false
+                    ),
                 contentScale = ContentScale.FillBounds
             )
 
@@ -126,7 +133,7 @@ fun GebindesteigungCard(
                 color = DividerDefaults.color
             )
 
-            Text("🪓 Hiebdeckarten: α → Steigung", style = schieferTitleStyle())
+            Text("🪓 Hiebdeckarten: α → Steigung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
             Spacer(modifier = Modifier.height(8.dp))
 
             AsyncImage(
@@ -137,7 +144,12 @@ fun GebindesteigungCard(
                     .height(200.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .clickable { zoomImageUrl = gebindesteigung1.bildUrl }
-                    .shadow(8.dp, RoundedCornerShape(12.dp)),
+                    .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
+                    .shadow(
+                        elevation = 20.dp,
+                        shape = RoundedCornerShape(12.dp),
+                        clip = false
+                    ),
                 contentScale = ContentScale.Crop
             )
 

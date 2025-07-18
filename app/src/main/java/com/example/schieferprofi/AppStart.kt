@@ -19,7 +19,6 @@ import com.example.schieferprofi.ui.screen.FavoritenScreen
 import com.example.schieferprofi.ui.screen.GebindesteigungScreen
 import com.example.schieferprofi.ui.screen.HomeScreen
 import com.example.schieferprofi.ui.screen.LexikonScreen
-import com.example.schieferprofi.ui.screen.QuizScreen
 import com.example.schieferprofi.ui.screen.WinkelmesserScreen
 import com.example.schieferprofi.ui.screen.detailscreen.DetailAltdeutschScreen
 import com.example.schieferprofi.ui.screen.detailscreen.DetailBogenschnittScreen
@@ -83,10 +82,6 @@ fun AppStart() {
                     FavoritenScreen(
                         navController = navController
                     )
-                }
-
-                composable("quiz") {
-                    QuizScreen(onBackClick = { navController.popBackStack() })
                 }
 
                 composable(

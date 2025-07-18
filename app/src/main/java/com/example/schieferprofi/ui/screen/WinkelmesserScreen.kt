@@ -102,10 +102,10 @@ fun WinkelmesserScreen() {
                 fontSize = 40.sp,
                 textDecoration = TextDecoration.Underline)
 
-            SpiritLibelle(
-                angle = displayX,
-                orientation = Orientation.Horizontal
-            )
+//            SpiritLibelle(
+//                angle = displayX,
+//                orientation = Orientation.Horizontal
+//            )
 
             SpiritLibelle(
                 angle = displayY,

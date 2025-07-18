@@ -2,6 +2,7 @@ package com.example.schieferprofi.ui.components
 
 import WabenDeckungInfo
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,11 +14,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
@@ -52,20 +55,31 @@ fun WabenCard(
                         .height(200.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
-                        .shadow(20.dp, RoundedCornerShape(12.dp), clip = false),
+                        .shadow(
+                            elevation = 20.dp,
+                            shape = RoundedCornerShape(12.dp),
+                            clip = false
+                        ),
                     contentScale = ContentScale.Crop
                 )
-
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(deckung.name, style = schieferTitleStyle())
-                FavoritenIconButton(
-                    deckart = FavoritenDeckart(
-                        idDeckart = deckung.id,
-                        deckartName = deckung.name,
-                        deckartBeschreibung = deckung.beschreibung,
-                        deckartBild = deckung.bildUrl
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        deckung.name,
+                        style = schieferTitleStyle(),
+                        textDecoration = TextDecoration.Underline
                     )
-                )
+                    FavoritenIconButton(
+                        deckart = FavoritenDeckart(
+                            idDeckart = deckung.id,
+                            deckartName = deckung.name,
+                            deckartBeschreibung = deckung.beschreibung,
+                            deckartBild = deckung.bildUrl
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -76,40 +90,48 @@ fun WabenCard(
                 HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Text("📘 Beschreibung", style = schieferTitleStyle())
+                Text("📘 Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(waben.beschreibung, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🧱 Deckunterlage", style = schieferTitleStyle())
+                Text("🧱 Deckunterlage", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(waben.deckunterlage, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🔩 Befestigung", style = schieferTitleStyle())
+                Text("🔩 Befestigung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(waben.befestigung, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🪨 Decksteinmodell", style = schieferTitleStyle())
+                Text("🪨 Decksteinmodell", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(waben.decksteinmodell, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🌀 Deckungsart", style = schieferTitleStyle())
+                Text("🌀 Deckungsart", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(waben.deckungsart, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("📏 Einteilung", style = schieferTitleStyle())
+                Text("📏 Einteilung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text("• Rechts-Links-Deckung: ${if (waben.einteilung.rechtsLinksdeckung) "Ja" else "Nein"}", style = schieferBodyStyle())
                 Text("• Waagerecht: ${waben.einteilung.waagerecht} cm", style = schieferSecondaryStyle())
                 Text("• Senkrecht: ${waben.einteilung.senkrecht} cm", style = schieferSecondaryStyle())
                 Text("• Formel: ${waben.einteilung.schnuerabstandFormel}", style = schieferSecondaryStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🏗️ Ortdeckung", style = schieferTitleStyle())
+                Text("🏗️ Ortdeckung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(waben.ortdeckung, style = schieferBodyStyle())
             }
 
             item {
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("📐 Formate", style = schieferTitleStyle())
+                Text("📐 Formate", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
 
             items(waben.formate) {

@@ -1,6 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,11 +12,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
@@ -60,15 +63,23 @@ fun GeschlaufteDeckungCard(
                     contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(deckung.name, style = schieferTitleStyle())
-                FavoritenIconButton(
-                    deckart = FavoritenDeckart(
-                        idDeckart = deckung.id,
-                        deckartName = deckung.name,
-                        deckartBeschreibung = deckung.beschreibung,
-                        deckartBild = deckung.bildUrl
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        deckung.name,
+                        style = schieferTitleStyle(),
+                        textDecoration = TextDecoration.Underline
                     )
-                )
+                    FavoritenIconButton(
+                        deckart = FavoritenDeckart(
+                            idDeckart = deckung.id,
+                            deckartName = deckung.name,
+                            deckartBeschreibung = deckung.beschreibung,
+                            deckartBild = deckung.bildUrl
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -81,7 +92,8 @@ fun GeschlaufteDeckungCard(
                     color = DividerDefaults.color
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Beschreibung", style = schieferTitleStyle())
+                Text("Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(geschlaufte.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("Deckunterlage: ${geschlaufte.deckunterlage}", style = schieferBodyStyle())

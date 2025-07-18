@@ -26,7 +26,7 @@ class GebindesteigungRepositoryImpl(
 ) : GebindesteigungRepositoryInterface {
 
     private val gson = Gson()
-    private val cacheTimeout = 90_000L // 90 Sekunden
+    private val cacheTimeout = 90_000L
 
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -36,11 +36,9 @@ class GebindesteigungRepositoryImpl(
     }
 
     override suspend fun getGebindesteigung(): GebindesteigungInfo {
-        // Versuche zuerst aus dem Cache zu laden
         val cachedData = gebindesteigungCacheDao.getAll()
         val currentTime = System.currentTimeMillis()
         
-        // Prüfe ob Cache-Daten vorhanden und aktuell sind
         if (cachedData.isNotEmpty() && (currentTime - cachedData.first().lastUpdated) < cacheTimeout) {
             return try {
                 gson.fromJson(cachedData.first().jsonData, GebindesteigungInfo::class.java)
@@ -49,7 +47,6 @@ class GebindesteigungRepositoryImpl(
             }
         }
 
-        // Wenn keine Internetverbindung oder Cache ist aktuell, verwende Cache-Daten
         if (!isNetworkAvailable() && cachedData.isNotEmpty()) {
             return try {
                 gson.fromJson(cachedData.first().jsonData, GebindesteigungInfo::class.java)
@@ -58,7 +55,6 @@ class GebindesteigungRepositoryImpl(
             }
         }
 
-        // Lade von API und speichere in Cache
         return try {
             val apiData = apiService.getGebindesteigung()
             val jsonData = gson.toJson(apiData)
@@ -71,7 +67,6 @@ class GebindesteigungRepositoryImpl(
             apiData
         } catch (e: Exception) {
             Log.e("GEBINDESTEIGUNG", "Error fetching gebindeteigung: ${e.message}")
-            // Bei API-Fehler versuche Cache zu verwenden
             if (cachedData.isNotEmpty()) {
                 try {
                     gson.fromJson(cachedData.first().jsonData, GebindesteigungInfo::class.java)
@@ -85,11 +80,9 @@ class GebindesteigungRepositoryImpl(
     }
 
     override suspend fun getGebindesteigung1(): Gebindesteigung1Info {
-        // Versuche zuerst aus dem Cache zu laden
         val cachedData = gebindesteigung1CacheDao.getAll()
         val currentTime = System.currentTimeMillis()
         
-        // Prüfe ob Cache-Daten vorhanden und aktuell sind
         if (cachedData.isNotEmpty() && (currentTime - cachedData.first().lastUpdated) < cacheTimeout) {
             return try {
                 gson.fromJson(cachedData.first().jsonData, Gebindesteigung1Info::class.java)
@@ -98,7 +91,6 @@ class GebindesteigungRepositoryImpl(
             }
         }
 
-        // Wenn keine Internetverbindung oder Cache ist aktuell, verwende Cache-Daten
         if (!isNetworkAvailable() && cachedData.isNotEmpty()) {
             return try {
                 gson.fromJson(cachedData.first().jsonData, Gebindesteigung1Info::class.java)
@@ -107,7 +99,6 @@ class GebindesteigungRepositoryImpl(
             }
         }
 
-        // Lade von API und speichere in Cache
         return try {
             val apiData = apiService.getGebindesteigung1()
             val jsonData = gson.toJson(apiData)
@@ -120,7 +111,6 @@ class GebindesteigungRepositoryImpl(
             apiData
         } catch (e: Exception) {
             Log.e("GEBINDESTEIGUNG", "Error fetching gebindeteigung1: ${e.message}")
-            // Bei API-Fehler versuche Cache zu verwenden
             if (cachedData.isNotEmpty()) {
                 try {
                     gson.fromJson(cachedData.first().jsonData, Gebindesteigung1Info::class.java)

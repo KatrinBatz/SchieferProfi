@@ -44,7 +44,7 @@ fun HomeScreen() {
             )
 
             Text(
-                text = "Die App vereint ein umfangreiches Schieferdeckungs-Lexikon mit Bildern und Fachinfos, eine Favoritenfunktion für schnellen Zugriff, einen integrierten Winkelmesser zur Neigungsbestimmung und ein interaktives Quiz, um dein Wissen spielerisch zu testen.",
+                text = "Die App vereint ein umfangreiches Schieferdeckungs-Lexikon mit Bildern und Fachinfos, eine Favoritenfunktion für schnellen Zugriff und einen integrierten Winkelmesser zur Neigungsbestimmung.",
                 fontFamily = FontFamily(Font(R.font.cormorant_regular)),
                 fontSize = 22.sp,
                 color = colorResource(R.color.hellgrau),

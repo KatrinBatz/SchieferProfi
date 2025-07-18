@@ -1,6 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,11 +13,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
@@ -52,20 +55,31 @@ fun UnterlegteCard(
                         .height(200.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
-                        .shadow(20.dp, RoundedCornerShape(12.dp), clip = false),
+                        .shadow(
+                            elevation = 20.dp,
+                            shape = RoundedCornerShape(12.dp),
+                            clip = false
+                        ),
                     contentScale = ContentScale.Crop
                 )
-
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(deckung.name, style = schieferTitleStyle())
-                FavoritenIconButton(
-                    deckart = FavoritenDeckart(
-                        idDeckart = deckung.id,
-                        deckartName = deckung.name,
-                        deckartBeschreibung = deckung.beschreibung,
-                        deckartBild = deckung.bildUrl
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        deckung.name,
+                        style = schieferTitleStyle(),
+                        textDecoration = TextDecoration.Underline
                     )
-                )
+                    FavoritenIconButton(
+                        deckart = FavoritenDeckart(
+                            idDeckart = deckung.id,
+                            deckartName = deckung.name,
+                            deckartBeschreibung = deckung.beschreibung,
+                            deckartBild = deckung.bildUrl
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -76,15 +90,18 @@ fun UnterlegteCard(
                 HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Text("📘 Beschreibung", style = schieferTitleStyle())
+                Text("📘 Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(unterlegte.beschreibung, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🧱 Deckunterlage", style = schieferTitleStyle())
+                Text("🧱 Deckunterlage", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(unterlegte.deckunterlage, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🔩 Befestigung", style = schieferTitleStyle())
+                Text("🔩 Befestigung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text("• Klammer-Typ: ${unterlegte.befestigung.klammerTyp}", style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -95,7 +112,8 @@ fun UnterlegteCard(
 
             item {
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("📐 Formate", style = schieferTitleStyle())
+                Text("📐 Formate", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
             }
 
             items(unterlegte.formate) {
@@ -110,15 +128,18 @@ fun UnterlegteCard(
 
             item {
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("📎 Flächeneinteilung", style = schieferTitleStyle())
+                Text("📎 Flächeneinteilung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(unterlegte.flaecheneinteilungHinweis, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🏰 Ort & First", style = schieferTitleStyle())
+                Text("🏰 Ort & First", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(unterlegte.ortFirstHinweis, style = schieferBodyStyle())
 
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("🖼️ Deckbild-Hinweis", style = schieferTitleStyle())
+                Text("🖼️ Deckbild-Hinweis", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(unterlegte.deckbildHinweis, style = schieferBodyStyle())
             }
         }

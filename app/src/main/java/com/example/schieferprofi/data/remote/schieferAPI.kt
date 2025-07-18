@@ -29,7 +29,6 @@ import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 const val BASE_URL = "https://ktor-schiefer-api.onrender.com/"
 
@@ -47,9 +46,6 @@ interface APIService {
     @GET("deckungen")
     suspend fun getDeckungen(): List<Deckung>
 
-    @GET("lookup.php")
-    suspend fun getDeckungById(@Query("i") id: String): Deckung
-
     @GET("/deckungs_regelwerk")
     suspend fun getDeckungsregelwerk(): List<DeckungsRegelwerk>
 
@@ -58,9 +54,6 @@ interface APIService {
 
     @GET("schiefer/gebindesteigung1")
     suspend fun getGebindesteigung1(): Gebindesteigung1Info
-
-//    @GET("/quiz")
-//    suspend fun getQuiz(): List<Quiz>
 
     @GET("schiefer/altdeutsch")
     suspend fun getAltdeutsche(): AltdeutscheDeckungInfo

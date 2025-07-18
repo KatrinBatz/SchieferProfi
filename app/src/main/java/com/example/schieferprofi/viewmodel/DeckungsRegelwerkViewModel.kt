@@ -39,7 +39,7 @@ class DeckungsRegelwerkViewModel(
     private fun startPolling() {
         viewModelScope.launch {
             while (true) {
-                delay(90_000L) // 90 Sekunden
+                delay(90_000L)
                 if (isNetworkAvailable()) {
                     fetchDeckungsRegelwerk()
                 }

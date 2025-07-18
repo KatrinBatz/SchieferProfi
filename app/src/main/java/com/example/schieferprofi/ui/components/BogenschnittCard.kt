@@ -1,6 +1,7 @@
 package com.example.schieferprofi.ui.components
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,11 +14,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
@@ -45,7 +48,6 @@ fun BogenschnittCard(
         LazyColumn(
             modifier = Modifier.padding(16.dp).fillMaxWidth()
         ) {
-            // Kopfbereich mit Bild & Basisdaten
             item {
                 AsyncImage(
                     model = deckung.bildUrl,
@@ -63,15 +65,23 @@ fun BogenschnittCard(
                     contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(deckung.name, style = schieferTitleStyle())
-                FavoritenIconButton(
-                    deckart = FavoritenDeckart(
-                        idDeckart = deckung.id,
-                        deckartName = deckung.name,
-                        deckartBeschreibung = deckung.beschreibung,
-                        deckartBild = deckung.bildUrl
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        deckung.name,
+                        style = schieferTitleStyle(),
+                        textDecoration = TextDecoration.Underline
                     )
-                )
+                    FavoritenIconButton(
+                        deckart = FavoritenDeckart(
+                            idDeckart = deckung.id,
+                            deckartName = deckung.name,
+                            deckartBeschreibung = deckung.beschreibung,
+                            deckartBild = deckung.bildUrl
+                        )
+                    )
+                }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -86,9 +96,9 @@ fun BogenschnittCard(
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
-            // Bogenschnitt spezifisch
             item {
-                Text("Beschreibung", style = schieferTitleStyle())
+                Text("📝 Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(bogenschnitt.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("Decksteinmodell: ${bogenschnitt.decksteinmodell.joinToString()}", style = schieferBodyStyle())
@@ -100,7 +110,8 @@ fun BogenschnittCard(
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
-            item { Text("Formate Wand", style = schieferTitleStyle()) }
+            item { Text("📐 Formate Wand", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp)) }
             items(bogenschnitt.formateWand) { format ->
                 Text("• Größe: ${format.groesse}", style = schieferBodyStyle())
                 Text("  Höhenüberdeckung: ${format.hoehenUeberdeckung} mm, Seitenüberdeckung: ${format.seitenUeberdeckung} mm", style = schieferSecondaryStyle())
@@ -110,7 +121,8 @@ fun BogenschnittCard(
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
-            item { Text("Ort-Zuordnung", style = schieferTitleStyle()) }
+            item { Text("📍Ort-Zuordnung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp)) }
             items(bogenschnitt.ortZuordnung) { ort ->
                 Text("• Format: ${ort.format}", style = schieferBodyStyle())
                 Text("  Höhenüberdeckung: ${ort.hoehenUeberdeckung} mm", style = schieferSecondaryStyle())
@@ -119,7 +131,8 @@ fun BogenschnittCard(
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
-            item { Text("Kehl-Material", style = schieferTitleStyle()) }
+            item { Text("🪨 Kehl-Material", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Spacer(modifier = Modifier.height(10.dp)) }
             items(bogenschnitt.kehlMaterial) { kehl ->
                 Text("• Sortierung: ${kehl.sortierung}", style = schieferBodyStyle())
                 Text("  Maße: ${kehl.masse}", style = schieferSecondaryStyle())

@@ -27,6 +27,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -58,29 +59,38 @@ fun DetailedDrawer(
                 Column(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
+                        .padding(top = 32.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
                     Spacer(Modifier.height(12.dp))
-                    Row{
-                        Text("Schiefer Profi",
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            "Schiefer Profi",
                             modifier = Modifier.padding(16.dp),
                             style = MaterialTheme.typography.titleLarge,
                             color = colorResource(R.color.hellgrau),
                             fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                            fontSize = 26.sp)
+                            fontSize = 28.sp
+                        )
                         Image(
                             painter = painterResource(R.drawable.hammer1),
                             contentDescription = "Schiefer Logo",
                             modifier = Modifier
                                 .padding(16.dp)
-                                .height(50.dp)
+                                .height(60.dp)
                                 .clip(
                                     MaterialTheme.shapes.medium
 
                                 )
                         )
                     }
-                    HorizontalDivider()
+                    HorizontalDivider(
+                        color = colorResource(R.color.mylogo_background),
+                        thickness = 3.dp,
+                        modifier = Modifier.padding(vertical = 16.dp)
+                    )
 
 
                     NavigationDrawerItem(
@@ -88,7 +98,7 @@ fun DetailedDrawer(
                             Text(
                                 text = "Schiefer Lexikon",
                                 fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                                fontSize = 22.sp,
+                                fontSize = 24.sp,
                                 color = colorResource(R.color.hellgrau)
                             )
                         },
@@ -99,12 +109,18 @@ fun DetailedDrawer(
                         }
                     )
 
+                    HorizontalDivider(
+                        color = colorResource(R.color.mylogo_background),
+                        thickness = 1.dp,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+
                     NavigationDrawerItem(
                         label = {
                             Text(
                                 text = "Gebindesteigung",
                                 fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                                fontSize = 22.sp,
+                                fontSize = 24.sp,
                                 color = colorResource(R.color.hellgrau)
                             )
                         },
@@ -115,12 +131,18 @@ fun DetailedDrawer(
                         }
                     )
 
+                    HorizontalDivider(
+                        color = colorResource(R.color.mylogo_background),
+                        thickness = 1.dp,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+
                     NavigationDrawerItem(
                         label = {
                             Text(
                                 text = "Deckungsregelwerk",
                                 fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                                fontSize = 22.sp,
+                                fontSize = 24.sp,
                                 color = colorResource(R.color.hellgrau)
                             )
                         },
@@ -131,12 +153,18 @@ fun DetailedDrawer(
                         }
                     )
 
+                    HorizontalDivider(
+                        color = colorResource(R.color.mylogo_background),
+                        thickness = 1.dp,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+
                     NavigationDrawerItem(
                         label = {
                             Text(
                                 text = "Favoriten",
                                 fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                                fontSize = 22.sp,
+                                fontSize = 24.sp,
                                 color = colorResource(R.color.hellgrau)
                             )
                         },
@@ -147,12 +175,18 @@ fun DetailedDrawer(
                         }
                     )
 
+                    HorizontalDivider(
+                        color = colorResource(R.color.mylogo_background),
+                        thickness = 1.dp,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+
                     NavigationDrawerItem(
                         label = {
                             Text(
                                 text = "Winkelmesser",
                                 fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                                fontSize = 22.sp,
+                                fontSize = 24.sp,
                                 color = colorResource(R.color.hellgrau)
                             )
                         },
@@ -162,24 +196,6 @@ fun DetailedDrawer(
                             navController.navigate("winkelmesser")
                         }
                     )
-
-                    NavigationDrawerItem(
-                        label = {
-                            Text(
-                                text = "Schiefer Quiz",
-                                fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                                fontSize = 22.sp,
-                                color = colorResource(R.color.hellgrau)
-                            )
-                        },
-                        selected = false,
-                        onClick = {
-                            scope.launch { drawerState.close() }
-                            navController.navigate("quiz")
-                        }
-                    )
-
-
                 }
             }
         },
@@ -188,7 +204,7 @@ fun DetailedDrawer(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = {  },
+                    title = { },
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch {
