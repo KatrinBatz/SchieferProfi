@@ -43,7 +43,6 @@ fun SpiritLibelle(
     val mainTrackPx = with(density) { trackLength.toPx() }
 
     val travelRange = mainTrackPx - bubblePx
-
     val offsetPx = (normalized * travelRange) - (travelRange / 2)
 
     Box(
