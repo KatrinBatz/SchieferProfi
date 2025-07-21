@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,14 +42,14 @@ fun WinkelmesserScreen() {
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
 
-    var tiltX by remember { mutableStateOf(0f) }
-    var tiltY by remember { mutableStateOf(0f) }
-    var calibratedX by remember { mutableStateOf(0f) }
-    var calibratedY by remember { mutableStateOf(0f) }
+    var tiltX by remember { mutableFloatStateOf(0f) }
+    var tiltY by remember { mutableFloatStateOf(0f) }
+    var calibratedX by remember { mutableFloatStateOf(0f) }
+    var calibratedY by remember { mutableFloatStateOf(0f) }
 
     var isHold by remember { mutableStateOf(false) }
-    var heldX by remember { mutableStateOf(0f) }
-    var heldY by remember { mutableStateOf(0f) }
+    var heldX by remember { mutableFloatStateOf(0f) }
+    var heldY by remember { mutableFloatStateOf(0f) }
 
     DisposableEffect(Unit) {
         val rotationVectorSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
@@ -96,20 +97,25 @@ fun WinkelmesserScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text("Winkelmesser",
+            Text(
+                "Winkelmesser",
                 color = colorResource(R.color.hellgrau),
                 fontFamily = FontFamily(Font(R.font.ptserif_bolditalic)),
                 fontSize = 40.sp,
-                textDecoration = TextDecoration.Underline)
-
-//            SpiritLibelle(
-//                angle = displayX,
-//                orientation = Orientation.Horizontal
-//            )
+                textDecoration = TextDecoration.Underline
+            )
 
             SpiritLibelle(
                 angle = displayY,
-                orientation = Orientation.Vertical
+                orientation = Orientation.Vertical,
+                modifier = Modifier.weight(1f)
+            )
+
+            Text(
+                text = "X: ${"%.1f".format(displayX)}°   Y: ${"%.1f".format(displayY)}°",
+                color = colorResource(R.color.moosgruen),
+                fontSize = 28.sp,
+                modifier = Modifier.padding(vertical = 8.dp)
             )
 
             Row(
@@ -125,7 +131,7 @@ fun WinkelmesserScreen() {
                         containerColor = colorResource(R.color.moosgruen)
                     )
                 ) {
-                    Text("Set")
+                    Text("Nullen")
                 }
 
                 Button(
@@ -137,10 +143,12 @@ fun WinkelmesserScreen() {
                         }
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = if (isHold) colorResource(R.color.ziegelrot) else colorResource(R.color.moosgruen)
+                        containerColor = if (isHold) colorResource(R.color.ziegelrot) else colorResource(
+                            R.color.moosgruen
+                        )
                     )
                 ) {
-                    Text(if (isHold) "Hold ✔️" else "Hold")
+                    Text(if (isHold) "Halten" else "Halten")
                 }
             }
         }

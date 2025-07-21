@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.schieferprofi.R
@@ -26,29 +27,34 @@ fun HomeScreen() {
             .fillMaxSize()
     ) {
         Image(
-            painter = painterResource(R.drawable.schieferbackground1),
+            painter = painterResource(R.drawable.background2),
             contentDescription = "BackgroundImage",
             modifier = Modifier.fillMaxSize(1f),
-            contentScale = ContentScale.FillBounds
+            contentScale = ContentScale.FillBounds,
+            alpha = 0.4f
         )
         Column(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "SchieferProfi – Dein Begleiter fürs Dachhandwerk",
+                text = "SchieferProfi – \nDein Begleiter fürs Dachhandwerk",
                 fontFamily = FontFamily(Font(R.font.cormorant_bold)),
-                fontSize = 26.sp,
+                fontSize = 40.sp,
+                textDecoration = TextDecoration.Underline,
                 color = colorResource(R.color.hellgrau),
+                lineHeight = 50.sp,
                 textAlign = TextAlign.Center
             )
 
+
             Text(
                 text = "Die App vereint ein umfangreiches Schieferdeckungs-Lexikon mit Bildern und Fachinfos, eine Favoritenfunktion für schnellen Zugriff und einen integrierten Winkelmesser zur Neigungsbestimmung.",
-                fontFamily = FontFamily(Font(R.font.cormorant_regular)),
-                fontSize = 22.sp,
+                fontFamily = FontFamily(Font(R.font.cormorant_bold)),
+                fontSize = 30.sp,
                 color = colorResource(R.color.hellgrau),
                 textAlign = TextAlign.Center,
+                lineHeight = 34.sp,
                 modifier = Modifier.fillMaxWidth()
             )
         }
