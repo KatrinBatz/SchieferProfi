@@ -1,5 +1,6 @@
 package com.example.schieferprofi.ui.components
 
+import androidx.annotation.ColorRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -49,7 +50,6 @@ fun GebindesteigungCard(
     gebindesteigung: GebindesteigungInfo,
     gebindesteigung1: Gebindesteigung1Info
 ) {
-    var zoomImageUrl by remember { mutableStateOf<String?>(null) }
     val scrollState1 = rememberScrollState()
 
     GlassmorphismCard {
@@ -80,7 +80,6 @@ fun GebindesteigungCard(
                     .fillMaxWidth()
                     .height(200.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .clickable { zoomImageUrl = gebindesteigung.bildUrl }
                     .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
                     .shadow(
                         elevation = 20.dp,
@@ -143,7 +142,6 @@ fun GebindesteigungCard(
                     .fillMaxWidth()
                     .height(200.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .clickable { zoomImageUrl = gebindesteigung1.bildUrl }
                     .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
                     .shadow(
                         elevation = 20.dp,
@@ -166,25 +164,6 @@ fun GebindesteigungCard(
                     Text("α: ${eintrag.alpha}°", style = schieferSecondaryStyle(), modifier = Modifier.weight(0.5f))
                     Text("Steigung: ${eintrag.steigung} cm", style = schieferSecondaryStyle(), modifier = Modifier.weight(0.5f))
                 }
-            }
-        }
-    }
-
-    zoomImageUrl?.let { imageUrl ->
-        Dialog(onDismissRequest = { zoomImageUrl = null }) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.95f))
-                    .clickable { zoomImageUrl = null },
-                contentAlignment = Alignment.Center
-            ) {
-                ZoomableImage(
-                    imageUrl = imageUrl,
-                    modifier = Modifier
-                        .fillMaxWidth(0.95f)
-                        .fillMaxHeight(0.95f)
-                )
             }
         }
     }

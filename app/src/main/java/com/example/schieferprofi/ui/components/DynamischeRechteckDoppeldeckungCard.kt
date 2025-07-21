@@ -1,6 +1,6 @@
 package com.example.schieferprofi.ui.components
 
-import android.R.attr.text
+import FavoritenIconButton
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -25,9 +26,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.schieferprofi.R
+import com.example.schieferprofi.data.entity.FavoritenDeckart
 import com.example.schieferprofi.data.model.Deckung
 import com.example.schieferprofi.data.model.DynamischeRechteckDoppeldeckungInfo
-import com.example.schieferprofi.data.entity.FavoritenDeckart
 import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferSecondaryStyle
 import com.example.schieferprofi.util.schieferTitleStyle
@@ -38,6 +39,7 @@ import org.koin.androidx.compose.koinViewModel
 fun DynamischeRechteckDoppeldeckungCard(
     dynamischeRechteck: DynamischeRechteckDoppeldeckungInfo,
     deckung: Deckung,
+    snackbarHostState: SnackbarHostState,
     viewModel: FavoritenViewModel = koinViewModel()
 ) {
 
@@ -79,7 +81,8 @@ fun DynamischeRechteckDoppeldeckungCard(
                             deckartName = deckung.name,
                             deckartBeschreibung = deckung.beschreibung,
                             deckartBild = deckung.bildUrl
-                        )
+                        ),
+                        snackbarHostState = snackbarHostState
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -118,9 +121,6 @@ fun DynamischeRechteckDoppeldeckungCard(
             item {
                 Text("Höhenüberdeckung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
                 Spacer(modifier = Modifier.height(10.dp))
-                // Hier kannst du info.hoehenueberdeckung ggf. als Map ausgeben
-                // Zum Beispiel, falls es key-value-pairs gibt:
-                // info.hoehenueberdeckung.map.forEach { (key, value) -> ... }
             }
             item {
                 Text("Fugenversatz: ${dynamischeRechteck.fugenversatz} mm", style = schieferSecondaryStyle())

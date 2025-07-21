@@ -81,6 +81,9 @@ class DeckartenViewModel (
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+
     init {
         fetchDeckarten()
         startPolling()
@@ -109,6 +112,7 @@ class DeckartenViewModel (
     fun fetchDeckarten() {
         viewModelScope.launch {
             _isLoading.value = true
+            _errorMessage.value = null
             try {
                 coroutineScope {
                     val altdeutschDeferred = async { deckartenRepository.getAltdeutsche() }
@@ -154,6 +158,7 @@ class DeckartenViewModel (
                 }
             } catch (e: Exception) {
                 Log.e("DeckartenViewModel", "Paralleles Laden fehlgeschlagen: ${e.message}", e)
+                _errorMessage.value = "Fehler beim Laden der Deckarten: ${e.localizedMessage ?: "Unbekannter Fehler"}"
             } finally {
                 _isLoading.value = false
             }

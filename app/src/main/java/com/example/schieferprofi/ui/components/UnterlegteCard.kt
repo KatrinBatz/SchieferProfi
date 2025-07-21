@@ -1,5 +1,6 @@
 package com.example.schieferprofi.ui.components
 
+import FavoritenIconButton
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -36,6 +38,7 @@ import org.koin.androidx.compose.koinViewModel
 fun UnterlegteCard(
     unterlegte: UnterlegteDeckungInfo,
     deckung: Deckung,
+    snackbarHostState: SnackbarHostState,
     viewModel: FavoritenViewModel = koinViewModel()
     ) {
 
@@ -77,7 +80,8 @@ fun UnterlegteCard(
                             deckartName = deckung.name,
                             deckartBeschreibung = deckung.beschreibung,
                             deckartBild = deckung.bildUrl
-                        )
+                        ),
+                        snackbarHostState = snackbarHostState,
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))

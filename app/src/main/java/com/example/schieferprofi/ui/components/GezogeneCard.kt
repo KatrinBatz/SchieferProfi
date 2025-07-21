@@ -1,5 +1,6 @@
 package com.example.schieferprofi.ui.components
 
+import FavoritenIconButton
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,8 +39,9 @@ import org.koin.androidx.compose.koinViewModel
 fun GezogeneCard(
     gezogene: GezogeneDeckungInfo,
     deckung: Deckung,
+    snackbarHostState: SnackbarHostState,
     viewModel: FavoritenViewModel = koinViewModel()
-    ) {
+) {
 
     LaunchedEffect(Unit) {
         viewModel.ladeFavoriten()
@@ -46,7 +49,9 @@ fun GezogeneCard(
 
     GlassmorphismCard {
         LazyColumn(
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
             item {
                 AsyncImage(
@@ -56,7 +61,11 @@ fun GezogeneCard(
                         .fillMaxWidth()
                         .height(200.dp)
                         .clip(RoundedCornerShape(12.dp))
-                        .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
+                        .border(
+                            2.dp,
+                            colorResource(R.color.schiefergrau),
+                            RoundedCornerShape(12.dp)
+                        )
                         .shadow(
                             elevation = 20.dp,
                             shape = RoundedCornerShape(12.dp),
@@ -79,14 +88,21 @@ fun GezogeneCard(
                             deckartName = deckung.name,
                             deckartBeschreibung = deckung.beschreibung,
                             deckartBild = deckung.bildUrl
-                        )
+                        ),
+                        snackbarHostState = snackbarHostState,
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Verwendung: ${deckung.verwendung.joinToString()}", style = schieferSecondaryStyle())
-                Text("Schwierigkeitsgrad: ${deckung.schwierigkeitsgrad}", style = schieferSecondaryStyle())
+                Text(
+                    "Verwendung: ${deckung.verwendung.joinToString()}",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "Schwierigkeitsgrad: ${deckung.schwierigkeitsgrad}",
+                    style = schieferSecondaryStyle()
+                )
                 Spacer(modifier = Modifier.height(8.dp))
 
                 HorizontalDivider(
@@ -96,59 +112,126 @@ fun GezogeneCard(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Text("📘 Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "📘 Beschreibung",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(gezogene.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("🔧 Deckunterlage", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "🔧 Deckunterlage",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(gezogene.deckunterlage, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("🪚 Befestigung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "🪚 Befestigung",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text("• Haken: ${gezogene.befestigung.haken}", style = schieferBodyStyle())
                 Text("• Schrauben: ${gezogene.befestigung.schrauben}", style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("📏 Überdeckungen", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "📏 Überdeckungen",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
             }
             items(gezogene.ueberdeckungen) { eintrag ->
                 Text("• Befestigungsart: ${eintrag.befestigungsart}", style = schieferBodyStyle())
-                Text("  Höhenüberdeckung: ${eintrag.hoehenueberdeckung} mm", style = schieferSecondaryStyle())
-                Text("  Seitenüberdeckung: ${eintrag.seitenueberdeckung} mm", style = schieferSecondaryStyle())
+                Text(
+                    "  Höhenüberdeckung: ${eintrag.hoehenueberdeckung} mm",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "  Seitenüberdeckung: ${eintrag.seitenueberdeckung} mm",
+                    style = schieferSecondaryStyle()
+                )
                 Spacer(modifier = Modifier.height(8.dp))
             }
             item {
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("📦 Materialbedarf", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "📦 Materialbedarf",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
             }
             items(gezogene.materialbedarf) { material ->
-                Text("• Format: ${material.format} (${material.ueberdeckung})", style = schieferBodyStyle())
-                Text("  Schieferbedarf: ${material.schieferbedarf} Stück/m²", style = schieferSecondaryStyle())
-                Text("  Hakenverbrauch: ${material.hakenverbrauch} Stück/m²", style = schieferSecondaryStyle())
-                Text("  Lattenabstand: ${material.lattenabstand} cm", style = schieferSecondaryStyle())
-                Text("  Lattenverbrauch: ${material.lattenverbrauch} lfm/m²", style = schieferSecondaryStyle())
-                Text("  Gewicht pro 1000 Stück: ${material.gewichtPro1000Stk} kg", style = schieferSecondaryStyle())
+                Text(
+                    "• Format: ${material.format} (${material.ueberdeckung})",
+                    style = schieferBodyStyle()
+                )
+                Text(
+                    "  Schieferbedarf: ${material.schieferbedarf} Stück/m²",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "  Hakenverbrauch: ${material.hakenverbrauch} Stück/m²",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "  Lattenabstand: ${material.lattenabstand} cm",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "  Lattenverbrauch: ${material.lattenverbrauch} lfm/m²",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "  Gewicht pro 1000 Stück: ${material.gewichtPro1000Stk} kg",
+                    style = schieferSecondaryStyle()
+                )
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
             item {
                 Spacer(modifier = Modifier.height(12.dp))
-                Text("📐 Einteilung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "📐 Einteilung",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
-                Text("• Beschreibung: ${gezogene.einteilung.beschreibung}", style = schieferBodyStyle())
-                Text("• Rechenbeispiel: ${gezogene.einteilung.rechenbeispiel}", style = schieferSecondaryStyle())
-                Text("• Bemerkung: ${gezogene.einteilung.bemerkung}", style = schieferSecondaryStyle())
+                Text(
+                    "• Beschreibung: ${gezogene.einteilung.beschreibung}",
+                    style = schieferBodyStyle()
+                )
+                Text(
+                    "• Rechenbeispiel: ${gezogene.einteilung.rechenbeispiel}",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "• Bemerkung: ${gezogene.einteilung.bemerkung}",
+                    style = schieferSecondaryStyle()
+                )
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Text("🧮 Materialbedarf-Berechnung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "🧮 Materialbedarf-Berechnung",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
-                Text("• Formel: ${gezogene.materialbedarfBerechnung.formel}", style = schieferBodyStyle())
-                Text("• Rechenbeispiel: ${gezogene.materialbedarfBerechnung.rechenbeispiel}", style = schieferSecondaryStyle())
+                Text(
+                    "• Formel: ${gezogene.materialbedarfBerechnung.formel}",
+                    style = schieferBodyStyle()
+                )
+                Text(
+                    "• Rechenbeispiel: ${gezogene.materialbedarfBerechnung.rechenbeispiel}",
+                    style = schieferSecondaryStyle()
+                )
             }
         }
     }

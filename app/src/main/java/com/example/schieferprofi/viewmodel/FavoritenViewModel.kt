@@ -6,6 +6,7 @@ import com.example.schieferprofi.data.entity.FavoritenDeckart
 import com.example.schieferprofi.data.repository.FavoritenRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class FavoritenViewModel(
@@ -14,6 +15,9 @@ class FavoritenViewModel(
 
     private val _favoriten = MutableStateFlow<List<FavoritenDeckart>>(emptyList())
     val favoriten: StateFlow<List<FavoritenDeckart>> = _favoriten
+
+    private val _infoMessage = MutableStateFlow<String?>(null)
+    val infoMessage: StateFlow<String?> = _infoMessage.asStateFlow()
 
     fun ladeFavoriten() {
         viewModelScope.launch {
@@ -24,6 +28,7 @@ class FavoritenViewModel(
     fun favoritenEntfernen(id: String) {
         viewModelScope.launch {
             repository.removeDeckart(id)
+            _infoMessage.value = "Favorit entfernt"
             ladeFavoriten()
         }
     }
@@ -36,10 +41,16 @@ class FavoritenViewModel(
         viewModelScope.launch {
             if (isFavorit(deckart.idDeckart)) {
                 repository.removeDeckart(deckart.idDeckart)
+                _infoMessage.value = "Favorit entfernt"
             } else {
                 repository.addDeckart(deckart)
+                _infoMessage.value = "Favorit hinzugefügt"
             }
             ladeFavoriten()
         }
+    }
+
+    fun clearInfoMessage() {
+        _infoMessage.value = null
     }
 }

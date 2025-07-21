@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,15 +41,28 @@ import com.example.schieferprofi.util.schieferBodyStyle
 import com.example.schieferprofi.util.schieferTitleStyle
 import com.example.schieferprofi.viewmodel.FavoritenViewModel
 import org.koin.androidx.compose.koinViewModel
+import androidx.compose.runtime.remember
 
 @Composable
 fun FavoritenScreen(viewModel: FavoritenViewModel = koinViewModel(), navController: NavController) {
     val favoriten by viewModel.favoriten.collectAsState()
+    val infoMessage by viewModel.infoMessage.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
         viewModel.ladeFavoriten()
     }
-    Box(modifier = Modifier.padding(16.dp)) {
+
+    LaunchedEffect(infoMessage) {
+        if (infoMessage != null) {
+            snackbarHostState.showSnackbar(infoMessage!!)
+            viewModel.clearInfoMessage()
+        }
+    }
+
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp)) {
         Column {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
@@ -114,5 +130,9 @@ fun FavoritenScreen(viewModel: FavoritenViewModel = koinViewModel(), navControll
                 }
             }
         }
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }

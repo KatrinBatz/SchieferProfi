@@ -1,5 +1,6 @@
 package com.example.schieferprofi.ui.components
 
+import FavoritenIconButton
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,8 +37,9 @@ import org.koin.androidx.compose.koinViewModel
 fun GeschlaufteDeckungCard(
     geschlaufte: GeschlaufteDeckungInfo,
     deckung: Deckung,
+    snackbarHostState: SnackbarHostState,
     viewModel: FavoritenViewModel = koinViewModel()
-    ) {
+) {
 
 
     LaunchedEffect(Unit) {
@@ -44,7 +47,9 @@ fun GeschlaufteDeckungCard(
     }
     GlassmorphismCard {
         androidx.compose.foundation.lazy.LazyColumn(
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         ) {
             item {
                 AsyncImage(
@@ -54,7 +59,11 @@ fun GeschlaufteDeckungCard(
                         .fillMaxWidth()
                         .height(200.dp)
                         .clip(RoundedCornerShape(12.dp))
-                        .border(2.dp, colorResource(R.color.schiefergrau), RoundedCornerShape(12.dp))
+                        .border(
+                            2.dp,
+                            colorResource(R.color.schiefergrau),
+                            RoundedCornerShape(12.dp)
+                        )
                         .shadow(
                             elevation = 20.dp,
                             shape = RoundedCornerShape(12.dp),
@@ -77,14 +86,21 @@ fun GeschlaufteDeckungCard(
                             deckartName = deckung.name,
                             deckartBeschreibung = deckung.beschreibung,
                             deckartBild = deckung.bildUrl
-                        )
+                        ),
+                        snackbarHostState = snackbarHostState
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(deckung.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Verwendung: ${deckung.verwendung.joinToString()}", style = schieferSecondaryStyle())
-                Text("Schwierigkeitsgrad: ${deckung.schwierigkeitsgrad}", style = schieferSecondaryStyle())
+                Text(
+                    "Verwendung: ${deckung.verwendung.joinToString()}",
+                    style = schieferSecondaryStyle()
+                )
+                Text(
+                    "Schwierigkeitsgrad: ${deckung.schwierigkeitsgrad}",
+                    style = schieferSecondaryStyle()
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 4.dp),
@@ -92,7 +108,11 @@ fun GeschlaufteDeckungCard(
                     color = DividerDefaults.color
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Beschreibung", style = schieferTitleStyle(), textDecoration = TextDecoration.Underline)
+                Text(
+                    "Beschreibung",
+                    style = schieferTitleStyle(),
+                    textDecoration = TextDecoration.Underline
+                )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(geschlaufte.beschreibung, style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
@@ -100,7 +120,10 @@ fun GeschlaufteDeckungCard(
                 Spacer(modifier = Modifier.height(8.dp))
                 Text("Deckbild: ${geschlaufte.deckbild}", style = schieferBodyStyle())
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Materialverweis: ${geschlaufte.materialverweis}", style = schieferSecondaryStyle())
+                Text(
+                    "Materialverweis: ${geschlaufte.materialverweis}",
+                    style = schieferSecondaryStyle()
+                )
             }
         }
     }
