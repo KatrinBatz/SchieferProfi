@@ -33,22 +33,17 @@ fun SpiritLibelle(
     trackLength: Dp = 300.dp,
     trackThickness: Dp = 80.dp
 ) {
-    // Normalize angle to 0..1 (0 = -maxTilt, 1 = +maxTilt)
     val normalized by animateFloatAsState(
         targetValue = ((angle + maxTilt) / (2 * maxTilt)).coerceIn(0f, 1f),
         label = "bubblePosition"
     )
 
-    // Convert dimensions to pixels
     val density = LocalDensity.current
     val bubblePx = with(density) { bubbleDiameter.toPx() }
     val mainTrackPx = with(density) { trackLength.toPx() }
-    val crossTrackPx = with(density) { trackThickness.toPx() }
 
-    // Compute travel range on the main axis
     val travelRange = mainTrackPx - bubblePx
 
-    // Offset in pixels: centered at 0
     val offsetPx = (normalized * travelRange) - (travelRange / 2)
 
     Box(
@@ -98,7 +93,6 @@ fun SpiritLibelle(
             }
         }
 
-        // Bubble
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -120,7 +114,6 @@ fun SpiritLibelle(
                     shape = CircleShape
                 )
         ) {
-            // Angle text inside bubble
             Text(
                 text = "${"%.1f".format(angle)}°",
                 style = MaterialTheme.typography.bodyLarge.copy(
