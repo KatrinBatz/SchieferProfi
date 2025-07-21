@@ -70,7 +70,6 @@ fun SpiritLibelle(
             ),
         contentAlignment = Alignment.Center
     ) {
-        // Draw calibration ticks
         Canvas(modifier = Modifier.matchParentSize()) {
             val tickCount = 9
             for (i in 0..tickCount) {
